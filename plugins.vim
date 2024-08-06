@@ -145,7 +145,7 @@ Plug 'mhinz/vim-janah'
 " }}}
 
 " マシンローカルなプラグイン {{{
-let s:local_plug = g:vimrc_root_dir . '/local.d/plug.vim'
+let s:local_plug = g:vimrc_root_dir . '/local/plug.vim'
 
 if filereadable(s:local_plug)
   execute 'source' s:local_plug

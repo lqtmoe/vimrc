@@ -106,9 +106,7 @@ Plug 'junegunn/vim-easy-align'  " テキストを整形する
 Plug 'airblade/vim-rooter'  " ルートファインダ
 Plug 'tpope/vim-dispatch'  " 非同期にmakeを実行
 Plug 'mhinz/vim-grepper'  " 非同期にgrepを実行
-if v:version >= 901
-  Plug 'vim-skk/skkeleton'  " Vim版 SKK
-endif
+Plug 'vim-skk/eskk.vim'  " Vim版 SKK
 Plug 'previm/previm'  " Markdown/Asciidocをプレビューする
 Plug 'preservim/tagbar'  " tagファイルを利用したアウトライン表示
 Plug 'tyru/open-browser.vim'  " URLをブラウザで開く
@@ -436,35 +434,27 @@ nnoremap <C-g> <Cmd>Grepper<CR>
 
 " }}}
 
-" skkeletonの設定 {{{
+" eskkの設定 {{{
 
-" g:vimrc_skkeleton_disable - skkeletonを無効化する。
-if !exists('g:vimrc_skkeleton_disable')
-  let g:vimrc_skkeleton_disable = 0
+" g:vimrc_eskk_disable - eskkを無効化する。
+if !exists('g:vimrc_eskk_disable')
+  let g:vimrc_eskk_disable = 0
 endif
 
-" g:vimrc_skkeleton_config - skkeleton#config()に渡す設定情報
-let g:vimrc_skkeleton_config = {}
+let g:eskk#egg_like_newline = 1
+let g:eskk#directory = g:vimrc_cache_dir . '/eskk'
 
-if v:version >= 901 && !g:vimrc_skkeleton_disable
-  " IMEとしてskkeletonを使用する
+if !g:vimrc_eskk_disable
+  " IMEとしてeskkを使用する
   set imdisable  " システムのIMEを無効化
-  imap <C-j> <Plug>(skkeleton-enable)
-  cmap <C-j> <Plug>(skkeleton-enable)
-  tmap <C-j> <Plug>(skkeleton-enable)
-
-  " 設定
-  let g:vimrc_skkeleton_config.eggLikeNewline = v:true
-  let g:vimrc_skkeleton_config.usePopup = v:false
-  autocmd vimrc User skkeleton-initialize-pre call skkeleton#config(g:vimrc_skkeleton_config)
 
   " Lightline統合
-  function s:LightlineRegisterSkkeleton()
+  function s:LightlineRegisterESKK()
     if exists('g:lightline["component"]["skkmode"]')
           \ && exists('g:lightline["component_visible_condition"]["skkmode"]')
       let g:lightline['component']['skkmode'] =
-            \ '%{%skkeleton#is_enabled()?get({"hira":"あ","kata":"ア","hankata":"ｱ ","zenkaku":"Ａ","abbrev":"あ"},skkeleton#mode(),"Aa"):""%}'
-      let g:lightline['component_visible_condition']['skkmode'] = 'skkeleton#is_enabled()'
+            \ '%{eskk#is_enabled()?get(g:eskk#statusline_mode_strings,eskk#get_mode(),""):""}'
+      let g:lightline['component_visible_condition']['skkmode'] = 'eskk#is_enabled()'
     endif
 
     if exists('g:loaded_lightline')
@@ -473,7 +463,10 @@ if v:version >= 901 && !g:vimrc_skkeleton_disable
     endif
   endfunction
 
-  autocmd vimrc User skkeleton-initialize-post call s:LightlineRegisterSkkeleton()
+  autocmd vimrc User eskk-initialize-post call s:LightlineRegisterESKK()
+else
+  let g:loaded_eskk = 1
+  let g:eskk#no_default_mappings = 1
 endif
 
 " }}}

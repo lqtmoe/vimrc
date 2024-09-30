@@ -145,24 +145,20 @@ if has('statusline')
 
   " components
   let s:c = {
-        \ 'padding': '%=',
         \ 'separator': ' │ ',
+        \ 'padding': '%=',
         \ 'filename': '%t',
         \ 'readonly': '%r',
         \ 'modify': '%m',
-        \ 'encoding': '%{!empty(&fenc)?&fenc:&enc}',
-        \ 'format': '%{&ff}',
-        \ 'charvaluehex': '%04.B',
-        \ 'filetype': '%{!empty(&ft)?&ft:"unknown"}',
-        \ 'ruler': '%l,%c%V'
+        \ 'fileencfmt': '%{!empty(&fenc)?&fenc:&enc}(%{&ff})',
+        \ 'ruler': '%l,%c%V',
+        \ 'filetype': '%{!empty(&ft)?&ft:"unknown"}'
         \ }
 
   let &statusline = ' '
         \ . s:c['filename'] . s:c['readonly'] . s:c['modify']
-        \ . s:c['separator']
-        \ . s:c['encoding'] . s:c['separator'] . s:c['format']
         \ . s:c['padding']
-        \ . s:c['charvaluehex']
+        \ . s:c['fileencfmt']
         \ . s:c['separator']
         \ . s:c['ruler']
         \ . s:c['separator']

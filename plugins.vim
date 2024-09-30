@@ -184,12 +184,12 @@ set showtabline=1
 
 let g:lightline = {
       \ 'active': {
-      \   'left': [[ 'mode' ], [ 'skkmode', 'filename', 'readonly', 'modified' ], [ 'fileencoding', 'fileformat' ]],
-      \   'right': [[ 'lsp_errors', 'lsp_warnings', 'filetype' ], [ 'ruler' ], [ 'charvaluehex' ]]
+      \   'left': [[ 'mode', 'skkmode' ], [ 'filename' ], [ 'readonly', 'modified' ]],
+      \   'right': [[ 'lsp_errors', 'lsp_warnings', 'filetype' ], [ 'ruler' ], [ 'fileencfmt' ]]
       \ },
       \ 'inactive': {
-      \   'left': [[ 'filename', 'readonly', 'modified' ], [ 'fileencoding', 'fileformat' ]],
-      \   'right': [[ 'filetype' ]]
+      \   'left': [[ 'filename' ], [ 'readonly', 'modified' ]],
+      \   'right': [[ 'filetype' ], [ 'fileencfmt' ]]
       \ },
       \ 'tabline': {
       \   'left': [[ 'tabs' ]]
@@ -201,7 +201,7 @@ let g:lightline = {
       \ 'component': {
       \   'ruler': '%l,%c%V',
       \   'filetype': '%{!empty(&ft)?&ft:"unknown"}',
-      \   'charvaluehex': '%04.B',
+      \   'fileencfmt': '%{!empty(&fenc)?&fenc:&enc"}(%{&ff})',
       \   'skkmode': ''
       \ },
       \ 'component_visible_condition': {

@@ -277,6 +277,10 @@ call s:LightlineColorschemeUpdate()
 " Fernのバッファは行番号を非表示にする
 autocmd FileType fern setlocal nonumber
 
+" 矢印キーで開閉操作ができるようにする
+autocmd FileType fern nmap <buffer><silent> <Right> <Plug>(fern-action-open-or-expand)
+autocmd FileType fern nmap <buffer><silent> <Left> <Plug>(fern-action-collapse)
+
 " }}}
 
 " vim-lspの設定 {{{
@@ -362,6 +366,9 @@ if executable('forune')
 else
   let g:startify_custom_header = "startify#fortune#quote()"
 endif
+
+" aでも挿入モードを開始
+autocmd User Startified nnoremap <buffer><nowait><silent> a :enew <bar> startinsert<cr>
 
 " }}}
 

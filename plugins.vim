@@ -170,6 +170,19 @@ unlet s:first_install_marker
 
 " }}}
 
+" denopsの設定 {{{
+
+if v:version >= 901  " denops関係はVim 9.1以降で有効
+  " 推奨設定(denops-recommended 参照)
+  noremap <silent> <C-c> <Cmd>call denops#interrupt()<CR><C-c>
+  inoremap <silent> <C-c> <Cmd>call denops#interrupt()<CR><C-c>
+  cnoremap <silent> <C-c> <Cmd>call denops#interrupt()<CR><C-c>
+  command! DenopsRestart call denops#server#restart()
+  command! DenopsFixCache call denops#cache#update(#{reload: v:true})
+endif
+
+" }}}
+
 " FixCursorHoldの設定 {{{
 
 let g:cursorhold_updatetime = 300

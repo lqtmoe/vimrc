@@ -190,6 +190,12 @@ endif
 
 " }}}
 
+" Diff {{{
+
+set diffopt=internal,filler,closeoff,algorithm:histogram
+
+" }}}
+
 " Grep {{{
 
 " 外部Grep

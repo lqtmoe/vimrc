@@ -57,6 +57,7 @@ Plug 'halkn/lightline-lsp'  " vim-lspの状態をlightlineに表示する
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-hijack.vim'  " NetrwをFernに置き換える
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'  " NerdFontを使用してアイコンを表示する
+Plug 'lambdalisue/vim-fern-git-status'  " Git連携
 
 " vim-lsp - Language Server Protocolサポート
 Plug 'prabirshrestha/vim-lsp'

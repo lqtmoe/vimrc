@@ -328,7 +328,7 @@ let g:lsp_settings = {
 
 if has('timers')  " プラグイン無効であればキーマップ登録もしない
   imap <C-space> <Plug>(asyncomplete_force_refresh)
-  inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() : '<CR>'
+  imap <expr> <CR> pumvisible() ? asyncomplete#close_popup() : '<CR>'
 endif
 
 " }}}

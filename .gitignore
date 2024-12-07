@@ -1,4 +1,8 @@
 /1st_inst
 /local
 /plugged
+/vimrc_local
+/vimrc_local_pre
+/gvimrc_local
+/gvimrc_local_pre
 autoload/plug.vim

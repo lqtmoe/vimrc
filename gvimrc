@@ -9,13 +9,13 @@ scriptencoding utf-8
 " ローカル設定(事前) {{{
 
 if has('eval')
-  let local_gpre_vim = g:vimrc_root_dir . '/local/gpre.vim'
+  let s:gvimrc_local_pre = g:vimrc_root_dir . '/gvimrc_local_pre'
 
-  if filereadable(local_gpre_vim)
-    execute 'source' local_gpre_vim
+  if filereadable(s:gvimrc_local_pre)
+    execute 'source' s:gvimrc_local_pre
   endif
 
-  unlet local_gpre_vim
+  unlet s:gvimrc_local_pre
 endif
 
 " }}}
@@ -113,13 +113,13 @@ endif
 " ローカル設定(事後) {{{
 
 if has('eval')
-  let local_gpost_vim = g:vimrc_root_dir . '/local/gpost.vim'
+  let s:gvimrc_local = g:vimrc_root_dir . '/gvimrc_local'
 
-  if filereadable(local_gpost_vim)
-    execute 'source' local_gpost_vim
+  if filereadable(s:gvimrc_local)
+    execute 'source' s:gvimrc_local
   endif
 
-  unlet local_gpost_vim
+  unlet s:gvimrc_local
 endif
 
 " }}}

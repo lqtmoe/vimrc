@@ -67,13 +67,13 @@ endif
 " ローカル設定(事前) {{{
 
 if has('eval')
-  let s:local_pre_vim = g:vimrc_root_dir . '/local/pre.vim'
+  let s:vimrc_local_pre = g:vimrc_root_dir . '/vimrc_local_pre'
 
-  if filereadable(s:local_pre_vim)
-    execute 'source' s:local_pre_vim
+  if filereadable(s:vimrc_local_pre)
+    execute 'source' s:vimrc_local_pre
   endif
 
-  unlet s:local_pre_vim
+  unlet s:vimrc_local_pre
 endif
 
 " }}}
@@ -341,13 +341,13 @@ endif
 " ローカル設定(事後) {{{
 
 if has('eval')
-  let s:local_post_vim = g:vimrc_root_dir . '/local/post.vim'
+  let s:vimrc_local = g:vimrc_root_dir . '/vimrc_local'
 
-  if filereadable(s:local_post_vim)
-    execute 'source' s:local_post_vim
+  if filereadable(s:vimrc_local)
+    execute 'source' s:vimrc_local
   endif
 
-  unlet s:local_post_vim
+  unlet s:vimrc_local
 endif
 
 " }}}

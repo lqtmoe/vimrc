@@ -324,16 +324,20 @@ let g:lsp_settings = {
 
 " }}}
 
-" asyncomplete & vsnipの設定 {{{
+" asyncompleteの設定 {{{
 
 if has('timers')  " プラグイン無効であればキーマップ登録もしない
   imap <C-space> <Plug>(asyncomplete_force_refresh)
   inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() : '<CR>'
-
-  " 補完選択 → スニペットジャンプ → 通常キー入力
-  imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-  imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
 endif
+
+" }}}
+
+" vsnipの設定 {{{
+
+" 補完選択 → スニペットジャンプ → 通常キー入力
+imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
 
 " }}}
 

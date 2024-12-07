@@ -296,6 +296,13 @@ vnoremap <C-]> g<C-]>
 nnoremap g<C-]> <C-]>
 vnoremap g<C-]> <C-]>
 
+" 補完候補を<Tab>/<S-Tab>で選択する
+imap <expr> <Tab>   pumvisible() ? '<C-n>' : '<Tab>'
+imap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
+
+" 補完候補を<CR>で確定する
+imap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
+
 " 強調表示解除
 if has('extra_search')
   if v:version >= 900  " Vim9.0以上であれば<Cmd>が使える

@@ -6,6 +6,15 @@ scriptencoding utf-8
 "                   / .___/_/\__,_/\__, /_/_/ /_/____/                    "
 "==================/_/============/____/=================================="
 
+" 標準プラグインの無効化 {{{
+
+" Netrw
+" :h netrw-noload
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+
+" }}}
+
 " パッケージ {{{
 
 if has('packages')

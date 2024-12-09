@@ -288,12 +288,14 @@ call s:LightlineColorschemeUpdate()
 
 " fernの設定 {{{
 
-" Fernのバッファは行番号を非表示にする
-autocmd FileType fern setlocal nonumber
+augroup vimrc
+  " Fernのバッファは行番号を非表示にする
+  autocmd FileType fern setlocal nonumber
 
-" 矢印キーで開閉操作ができるようにする
-autocmd FileType fern nmap <buffer><silent> <Right> <Plug>(fern-action-open-or-expand)
-autocmd FileType fern nmap <buffer><silent> <Left> <Plug>(fern-action-collapse)
+  " 矢印キーで開閉操作ができるようにする
+  autocmd FileType fern nmap <buffer><silent> <Right> <Plug>(fern-action-open-or-expand)
+  autocmd FileType fern nmap <buffer><silent> <Left> <Plug>(fern-action-collapse)
+augroup END
 
 " }}}
 
@@ -386,7 +388,7 @@ else
 endif
 
 " aでも挿入モードを開始
-autocmd User Startified nnoremap <buffer><nowait><silent> a :enew <bar> startinsert<cr>
+autocmd vimrc User Startified nnoremap <buffer><nowait><silent> a :enew <bar> startinsert<cr>
 
 " }}}
 

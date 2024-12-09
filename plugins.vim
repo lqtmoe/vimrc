@@ -454,6 +454,11 @@ let g:rooter_patterns += ['*.nimble']
 let g:grepper = {}
 let g:grepper.tools = ['git', 'rg', 'ag', 'grep', 'findstr']
 
+" ウィンドウの高さをデフォルトに合わせる
+" :h grepper-faq-04
+let g:grepper.open = 0
+autocmd vimrc User Grepper copen
+
 " GrepHere with Grepper
 command! -nargs=0 -bang GrepHere Grepper -noprompt -cword -dir file
 

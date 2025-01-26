@@ -268,23 +268,22 @@ endfunction
 
 " 本体とlightlineのカラースキームを同期
 function! s:LightlineColorschemeUpdate(colors_name = get(g:, 'colors_name', 'default'))
-  let l:colors_names = []
-  call add(l:colors_names, a:colors_name)
-  call add(l:colors_names, substitute(a:colors_name, '-', '_', 'g'))
+  " 初期化
+  let g:lightline.colorscheme = 'default'
 
-  for colors_name in l:colors_names
-    if !empty(globpath(&rtp, 'autoload/lightline/colorscheme/' . colors_name . '.vim'))
-          \ || exists('g:lightline#colorscheme#' . colors_name . '#palette')
-      let g:lightline.colorscheme = colors_name
-      if exists('g:loaded_lightline')
-        call lightline#init()
-        call lightline#colorscheme()
-        call lightline#update()
-      endif
-
+  for l:c in [a:colors_name, substitute(a:colors_name, '-', '_', 'g')]
+    if !empty(globpath(&rtp, 'autoload/lightline/colorscheme/' . l:c . '.vim'))
+          \ || exists('g:lightline#colorscheme#' . l:c . '#palette')
+      let g:lightline.colorscheme = l:c
       break
     endif
   endfor
+
+  if exists('g:loaded_lightline')
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+  endif
 endfunction
 
 " 自動コマンド登録

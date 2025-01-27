@@ -15,16 +15,6 @@ let g:loaded_netrwPlugin = 1
 
 " }}}
 
-" パッケージ {{{
-
-if has('packages')
-silent! packadd! matchit
-silent! packadd! termdebug
-silent! packadd! editorconfig
-endif
-
-" }}}
-
 " プラグイン登録 {{{
 
 let v:errmsg = ""
@@ -177,6 +167,16 @@ if filewritable(g:vimrc_root_dir) == 2 && empty(glob(s:first_install_marker))
 endif
 
 unlet s:first_install_marker
+
+" }}}
+
+" パッケージ {{{
+
+if has('packages')
+silent! packadd! matchit
+silent! packadd! termdebug
+silent! packadd! editorconfig
+endif
 
 " }}}
 

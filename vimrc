@@ -303,6 +303,9 @@ imap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
 " 補完候補を<CR>で確定する
 imap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
 
+" コマンドラインでディレクトリ(らしきもの)を補完する時、<CR>で確定する
+cmap <expr> <CR> wildmenumode() && getcmdline() =~ '[\\/]$' ? '<C-y>' : '<CR>'
+
 " 強調表示解除
 if has('extra_search')
   if v:version >= 900  " Vim9.0以上であれば<Cmd>が使える

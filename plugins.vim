@@ -180,6 +180,14 @@ endif
 
 " }}}
 
+" 手動読み込み {{{
+
+if executable('man')
+  runtime ftplugin/man.vim  " :Manコマンドを常に使えるようにする
+endif
+
+" }}}
+
 " denopsの設定 {{{
 
 if v:version >= 901  " denops関係はVim 9.1以降で有効

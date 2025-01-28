@@ -330,6 +330,10 @@ let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_diagnostics_echo_delay = get(g:, 'cursorhold_updatetime', 300)
 let g:lsp_diagnostics_virtual_text_enabled = 0
 
+augroup vimrc
+  autocmd User lsp_buffer_enabled setlocal tagfunc=lsp#tagfunc
+augroup END
+
 " }}}
 
 " vim-lsp-settingsの設定 {{{

@@ -38,6 +38,7 @@ if v:version >= 901  " denops関係はVim 9.1以降で有効
   Plug 'vim-denops/denops.vim'  " TypeScript/JavaScriptベースのプラグインエコシステム
 endif
 Plug 'lambdalisue/nerdfont.vim'  " NerdFontグリフを取得
+Plug 'vim-jp/vital.vim'  " ユーティリティ関数群
 " }}}
 
 " Vim本体の機能を拡張/変更するプラグイン {{{

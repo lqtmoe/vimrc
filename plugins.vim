@@ -34,7 +34,8 @@ Plug 'junegunn/vim-plug'
 
 " ライブラリ/フレームワーク {{{
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }  " 非同期実行ライブラリ
-if v:version >= 901  " denops関係はVim 9.1以降で有効
+let s:denops_enable = v:version >= 901 && executable(get(g:, 'denops#deno', 'deno'))
+if s:denops_enable
   Plug 'vim-denops/denops.vim'  " TypeScript/JavaScriptベースのプラグインエコシステム
 endif
 Plug 'lambdalisue/nerdfont.vim'  " NerdFontグリフを取得
@@ -191,7 +192,7 @@ endif
 
 " denopsの設定 {{{
 
-if v:version >= 901  " denops関係はVim 9.1以降で有効
+if s:denops_enable
   " 推奨設定(denops-recommended 参照)
   noremap <silent> <C-c> <Cmd>call denops#interrupt()<CR><C-c>
   inoremap <silent> <C-c> <Cmd>call denops#interrupt()<CR><C-c>

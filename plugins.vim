@@ -254,7 +254,7 @@ let g:lightline = {
       \ 'component_raw': {},
       \ 'tab_component': {},
       \ 'tab_component_function': {
-      \   'modified': expand('<SID>)') . 'LightlineTabModified'
+      \   'modified': expand('<SID>)') . 'lightline_tab_modified'
       \ },
       \ 'colorscheme': 'default',
       \ 'mode_map': {},
@@ -265,7 +265,7 @@ let g:lightline = {
       \ }
 
 " タブ内の全ウィンドウを対象とした変更有無表示
-function! s:LightlineTabModified(n)
+function! s:lightline_tab_modified(n)
   for b in tabpagebuflist(a:n)
     if getbufvar(b, '&buftype', '') != 'terminal'  " Terminalは除外
       if getbufvar(b, '&modified', 0)
@@ -276,7 +276,7 @@ function! s:LightlineTabModified(n)
 endfunction
 
 " 本体とlightlineのカラースキームを同期
-function! s:LightlineColorschemeUpdate(colors_name = get(g:, 'colors_name', 'default'))
+function! s:lightline_colorscheme_update(colors_name = get(g:, 'colors_name', 'default'))
   " 初期化
   let g:lightline.colorscheme = 'default'
 
@@ -296,10 +296,10 @@ function! s:LightlineColorschemeUpdate(colors_name = get(g:, 'colors_name', 'def
 endfunction
 
 " 自動コマンド登録
-autocmd vimrc ColorScheme * call s:LightlineColorschemeUpdate(expand('<amatch>'))
+autocmd vimrc ColorScheme * call s:lightline_colorscheme_update(expand('<amatch>'))
 
 " 現在のカラースキームに対して適用するため呼び出し
-call s:LightlineColorschemeUpdate()
+call s:lightline_colorscheme_update()
 
 " }}}
 
@@ -502,7 +502,7 @@ if !g:vimrc_eskk_disable
   set imdisable  " システムのIMEを無効化
 
   " Lightline統合
-  function s:LightlineRegisterESKK()
+  function s:lightline_register_eskk()
     if exists('g:lightline["component"]["skkmode"]')
           \ && exists('g:lightline["component_visible_condition"]["skkmode"]')
       let g:lightline['component']['skkmode'] =
@@ -516,7 +516,7 @@ if !g:vimrc_eskk_disable
     endif
   endfunction
 
-  autocmd vimrc User eskk-initialize-post call s:LightlineRegisterESKK()
+  autocmd vimrc User eskk-initialize-post call s:lightline_register_eskk()
 else
   let g:loaded_eskk = 1
   let g:eskk#no_default_mappings = 1
@@ -585,10 +585,10 @@ if !g:vimrc_nerdfont_disable
   let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
   let g:lightline.tabline_subseparator = { 'left': "\ue0bd", 'right': "\ue0bd" }
   let g:lightline.component.filetype = '%{nerdfont#find()} %{!empty(&ft)?&ft:"unknown"}'
-  let g:lightline.tab_component_function.filename = expand('<SID>') . 'LightlineTabFileName'
+  let g:lightline.tab_component_function.filename = expand('<SID>') . 'lightline_tab_filename'
 
   " アイコン付きのファイル名表示
-  function! s:LightlineTabFileName(n)
+  function! s:lightline_tab_filename(n)
     let l:filename = lightline#tab#filename(a:n)
     return nerdfont#find(l:filename) . ' ' . l:filename
   endfunction

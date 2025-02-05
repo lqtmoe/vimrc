@@ -143,6 +143,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'rhysd/vim-color-spring-night'
 Plug 'yasukotelin/shirotelin'
 Plug 'mhinz/vim-janah'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 " }}}
 
 " マシンローカルなプラグイン {{{

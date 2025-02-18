@@ -44,7 +44,6 @@ Plug 'vim-jp/vital.vim'  " ユーティリティ関数群
 
 " Vim本体の機能を拡張/変更するプラグイン {{{
 Plug 'thinca/vim-ambicmd'  " 小文字で入力したコマンドを大文字に補完する
-Plug 'thinca/vim-singleton'  " 起動済みのVimでファイルを開く
 if has('timers') && v:version > 802
   Plug 'antoinemadec/FixCursorHold.nvim'  " 'updatetime'とCursorHoldの発生間隔を分離する
 endif
@@ -189,13 +188,6 @@ endif
 if executable('man')
   runtime ftplugin/man.vim  " :Manコマンドを常に使えるようにする
 endif
-
-" }}}
-
-" singletonの設定 {{{
-
-" 起動高速化のため、最初に呼び出す
-silent! call singleton#enable()
 
 " }}}
 

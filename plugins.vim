@@ -114,6 +114,7 @@ Plug 'preservim/tagbar'  " tagファイルを利用したアウトライン表�
 Plug 'tyru/open-browser.vim'  " URLをブラウザで開く
 Plug 'vim-jp/autofmt'  " 日本語の禁則処理に対応したテキスト整形
 Plug 'freitass/todo.txt-vim'  " todo.txt編集
+Plug 'tpope/vim-fugitive'  " Git wrapper
 " }}}
 
 " ファイルタイプサポート {{{

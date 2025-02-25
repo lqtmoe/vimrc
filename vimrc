@@ -9,13 +9,9 @@ scriptencoding utf-8
 
 " 𝑉𝑖 𝐼𝑀𝑝𝑟𝑜𝑣𝑒𝑑 {{{
 
-if &compatible
+silent! while &compatible
   set nocompatible
-endif
-
-" +eval機能が無効な場合
-silent! while 0
-  set nocompatible
+  silent! break
 silent! endwhile
 
 " }}}

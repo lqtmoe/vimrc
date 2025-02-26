@@ -102,6 +102,7 @@ Plug 'vim-scripts/AnsiEsc.vim'  " ANSIエスケープシーケンスを解釈す
 " 編集 {{{
 Plug 'tpope/vim-surround'  " テキスト周辺を編集する
 Plug 'junegunn/vim-easy-align'  " テキストを整形する
+Plug 'cohama/lexima.vim'  " 括弧などを自動展開する
 " }}}
 
 " ユーティリティ {{{
@@ -455,6 +456,17 @@ let g:ambiwidth_add_list = []
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
+" }}}
+
+" leximaの設定 {{{
+
+" ルールを手動で読み込む(キーマップ競合回避)
+let g:lexima_no_default_rules = 1
+call lexima#set_default_rules()
+
+" <CR>のマップを再定義(asyncompleteの設定も参照)
+inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() : lexima#expand('<CR>', 'i')
 
 " }}}
 

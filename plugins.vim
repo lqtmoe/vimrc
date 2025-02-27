@@ -543,11 +543,11 @@ if g:vimrc_input_method == 'skkeleton'
 
   " Lightline統合
   function s:lightline_register_skkeleton()
-    if exists('g:lightline["component"]["imstate"]')
-          \ && exists('g:lightline["component_visible_condition"]["imstate"]')
-      let g:lightline['component']['imstate'] =
+    if exists('g:lightline.component.imstate')
+          \ && exists('g:lightline.component_visible_condition.imstate')
+      let g:lightline.component.imstate =
             \ '%{%skkeleton#is_enabled()?get(#{hira:"あ",kata:"ア",hankata:"ｱ ",zenkaku:"Ａ",abbrev:"あ"},skkeleton#mode(),"Aa"):""%}'
-      let g:lightline['component_visible_condition']['imstate'] = 'skkeleton#is_enabled()'
+      let g:lightline.component_visible_condition.imstate = 'skkeleton#is_enabled()'
     endif
 
     if exists('g:loaded_lightline')
@@ -572,11 +572,11 @@ if g:vimrc_input_method == 'eskk'
 
   " Lightline統合
   function s:lightline_register_eskk()
-    if exists('g:lightline["component"]["imstate"]')
-          \ && exists('g:lightline["component_visible_condition"]["imstate"]')
-      let g:lightline['component']['imstate'] =
+    if exists('g:lightline.component.imstate')
+          \ && exists('g:lightline.component_visible_condition.imstate')
+      let g:lightline.component.imstate =
             \ '%{eskk#is_enabled()?get(g:eskk#statusline_mode_strings,eskk#get_mode(),""):""}'
-      let g:lightline['component_visible_condition']['imstate'] = 'eskk#is_enabled()'
+      let g:lightline.component_visible_condition.imstate = 'eskk#is_enabled()'
     endif
 
     if exists('g:loaded_lightline')

@@ -568,11 +568,11 @@ endif
 " eskkの設定 {{{
 
 if g:vimrc_input_method == 'eskk'
+  set imdisable  " システムのIMEを無効化
+
+  " 設定
   let g:eskk#egg_like_newline = 1
   let g:eskk#directory = g:vimrc_cache_dir . '/eskk'
-
-  " IMEとしてeskkを使用する
-  set imdisable  " システムのIMEを無効化
 
   " Lightline統合
   function s:lightline_register_eskk()

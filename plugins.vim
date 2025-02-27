@@ -246,54 +246,54 @@ set noshowmode
 set laststatus=2
 set showtabline=1
 
-let g:lightline = {
-      \ 'active': {
-      \   'left': [[ 'mode', 'imstate' ], [ 'filename' ], [ 'readonly', 'modified' ]],
-      \   'right': [[ 'lsp_errors', 'lsp_warnings', 'filetype' ], [ 'ruler' ], [ 'fileencfmt' ]]
-      \ },
-      \ 'inactive': {
-      \   'left': [[ 'filename' ], [ 'readonly', 'modified' ]],
-      \   'right': [[ 'filetype' ], [ 'fileencfmt' ]]
-      \ },
-      \ 'tabline': {
-      \   'left': [[ 'tabs' ]]
-      \ },
-      \ 'tab': {
-      \   'active': [ 'filename', 'modified' ],
-      \   'inactive': [ 'filename', 'modified' ]
-      \ },
-      \ 'component': {
-      \   'ruler': '%l,%c%V',
-      \   'filetype': '%{!empty(&ft)?&ft:"unknown"}',
-      \   'fileencfmt': '%{!empty(&fenc)?&fenc:&enc"}(%{&ff})',
-      \   'imstate': ''
-      \ },
-      \ 'component_visible_condition': {
-      \   'imstate': '0',
-      \ },
-      \ 'component_function': {},
-      \ 'component_function_visible_condition': {},
-      \ 'component_expand': {
-      \   'lsp_warnings': 'lightline_lsp#warnings',
-      \   'lsp_errors': 'lightline_lsp#errors',
-      \   'lsp_ok': 'lightline_lsp#ok'
-      \ },
-      \ 'component_type': {
-      \   'lsp_warnings': 'warning',
-      \   'lsp_errors': 'error',
-      \   'lsp_ok': 'middle'
-      \ },
-      \ 'component_raw': {},
-      \ 'tab_component': {},
-      \ 'tab_component_function': {
-      \   'modified': expand('<SID>)') . 'lightline_tab_modified'
-      \ },
-      \ 'colorscheme': 'default',
-      \ 'mode_map': {},
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '│', 'right': '│' },
-      \ 'tabline_separator': { 'left': '', 'right': '' },
-      \ 'tabline_subseparator': { 'left': '│', 'right': '│' }
+let g:lightline = #{
+      \   active: #{
+      \     left: [[ 'mode', 'imstate' ], [ 'filename' ], [ 'readonly', 'modified' ]],
+      \     right: [[ 'lsp_errors', 'lsp_warnings', 'filetype' ], [ 'ruler' ], [ 'fileencfmt' ]]
+      \   },
+      \   inactive: #{
+      \     left: [[ 'filename' ], [ 'readonly', 'modified' ]],
+      \     right: [[ 'filetype' ], [ 'fileencfmt' ]]
+      \   },
+      \   tabline: #{
+      \     left: [[ 'tabs' ]]
+      \   },
+      \   tab: #{
+      \     active: [ 'filename', 'modified' ],
+      \     inactive: [ 'filename', 'modified' ]
+      \   },
+      \   component: #{
+      \     ruler: '%l,%c%V',
+      \     filetype: '%{!empty(&ft)?&ft:"unknown"}',
+      \     fileencfmt: '%{!empty(&fenc)?&fenc:&enc"}(%{&ff})',
+      \     imstate: ''
+      \   },
+      \   component_visible_condition: #{
+      \     imstate: '0',
+      \   },
+      \   component_function: {},
+      \   component_function_visible_condition: {},
+      \   component_expand: #{
+      \     lsp_warnings: 'lightline_lsp#warnings',
+      \     lsp_errors: 'lightline_lsp#errors',
+      \     lsp_ok: 'lightline_lsp#ok'
+      \   },
+      \   component_type: #{
+      \     lsp_warnings: 'warning',
+      \     lsp_errors: 'error',
+      \     lsp_ok: 'middle'
+      \   },
+      \   component_raw: {},
+      \   tab_component: {},
+      \   tab_component_function: #{
+      \     modified: expand('<SID>)') . 'lightline_tab_modified'
+      \   },
+      \   colorscheme: 'default',
+      \   mode_map: {},
+      \   separator: #{ left: '', right: '' },
+      \   subseparator: #{ left: '│', right: '│' },
+      \   tabline_separator: #{ left: '', right: '' },
+      \   tabline_subseparator: #{ left: '│', right: '│' }
       \ }
 
 " タブ内の全ウィンドウを対象とした変更有無表示
@@ -353,7 +353,7 @@ augroup END
 let g:lsp_use_native_client = 1
 let g:lsp_semantic_enabled = 1
 let g:lsp_inlay_hints_enabled = 1
-let g:lsp_inlay_hints_mode = { 'normal': ['curline'] }
+let g:lsp_inlay_hints_mode = #{ normal: ['curline'] }
 let g:lsp_max_buffer_size = 1024 * 1024
 " 👀 vim-lsp/issues/1510
 "let g:lsp_diagnostics_float_cursor = 1
@@ -371,10 +371,10 @@ augroup END
 
 " vim-lsp-settingsの設定 {{{
 
-let g:lsp_settings = {
-      \ 'clangd': {
-      \   'args': ['--clang-tidy', '--header-insertion=never']
-      \ }
+let g:lsp_settings = #{
+      \   clangd: #{
+      \     args: ['--clang-tidy', '--header-insertion=never']
+      \   }
       \ }
 
 " }}}
@@ -425,9 +425,9 @@ let g:startify_bookmarks = []
 let g:startify_commands = []
 
 let g:startify_lists = [
-      \ { 'type': 'sessions',  'header': [' Sessions']  },
-      \ { 'type': 'bookmarks', 'header': [' Bookmarks'] },
-      \ { 'type': 'files',     'header': [' Recently Used'] },
+      \   #{ type: 'sessions',  header: [' Sessions']  },
+      \   #{ type: 'bookmarks', header: [' Bookmarks'] },
+      \   #{ type: 'files',     header: [' Recently Used'] },
       \ ]
 
 if executable('forune')
@@ -450,7 +450,7 @@ autocmd vimrc User Startified nnoremap <buffer><nowait><silent> a :enew <bar> st
 let g:brightest#enable_on_CursorHold = 1
 
 " Visualでハイライトすると目立ち過ぎず丁度良い
-let g:brightest#highlight = { 'group': 'Visual' }
+let g:brightest#highlight = #{ group: 'Visual' }
 
 if exists('##ModeChanged')
   " ビジュアルモードに入った時にBrightestのハイライト(Visual)を消去する
@@ -550,7 +550,7 @@ if g:vimrc_input_method == 'skkeleton'
     if exists('g:lightline["component"]["imstate"]')
           \ && exists('g:lightline["component_visible_condition"]["imstate"]')
       let g:lightline['component']['imstate'] =
-            \ '%{%skkeleton#is_enabled()?get({"hira":"あ","kata":"ア","hankata":"ｱ ","zenkaku":"Ａ","abbrev":"あ"},skkeleton#mode(),"Aa"):""%}'
+            \ '%{%skkeleton#is_enabled()?get(#{hira:"あ",kata:"ア",hankata:"ｱ ",zenkaku:"Ａ",abbrev:"あ"},skkeleton#mode(),"Aa"):""%}'
       let g:lightline['component_visible_condition']['imstate'] = 'skkeleton#is_enabled()'
     endif
 
@@ -645,10 +645,10 @@ let g:nerdfont#autofix_cellwidths = 0
 
 if g:vimrc_nerdfont_enable
   " lightline {{{
-  let g:lightline.separator = { 'left': "\ue0b0", 'right': "\ue0b6" }
-  let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b7" }
-  let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
-  let g:lightline.tabline_subseparator = { 'left': "\ue0bd", 'right': "\ue0bd" }
+  let g:lightline.separator = #{ left: "\ue0b0", right: "\ue0b6" }
+  let g:lightline.subseparator = #{ left: "\ue0b1", right: "\ue0b7" }
+  let g:lightline.tabline_separator = #{ left: "\ue0bc", right: "\ue0ba" }
+  let g:lightline.tabline_subseparator = #{ left: "\ue0bd", right: "\ue0bd" }
   let g:lightline.component.filetype = '%{nerdfont#find()} %{!empty(&ft)?&ft:"unknown"}'
   let g:lightline.tab_component_function.filename = expand('<SID>') . 'lightline_tab_filename'
 
@@ -664,8 +664,8 @@ if g:vimrc_nerdfont_enable
   " }}}
 
   " vim-lsp {{{
-  let g:lsp_diagnostics_signs_error = {'text': "\uf05e"}
-  let g:lsp_diagnostics_signs_warning = {'text': "\uf071"}
+  let g:lsp_diagnostics_signs_error = #{ text: "\uf05e" }
+  let g:lsp_diagnostics_signs_warning = #{ text: "\uf071" }
   " }}}
 
   " vim-ambiwidth {{{

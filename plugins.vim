@@ -430,7 +430,7 @@ let g:startify_lists = [
       \   #{ type: 'files',     header: [' Recently Used'] },
       \ ]
 
-if executable('forune')
+if executable('fortune')
   if exists('?systemlist')
     let g:startify_custom_header = "systemlist('fortune')"
   else

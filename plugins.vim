@@ -431,11 +431,7 @@ let g:startify_lists = [
       \ ]
 
 if executable('fortune')
-  if exists('?systemlist')
-    let g:startify_custom_header = "systemlist('fortune')"
-  else
-    let g:startify_custom_header = "split(system('fortune'), '\n')"
-  endif
+  let g:startify_custom_header = "systemlist('fortune')"
 else
   let g:startify_custom_header = "startify#fortune#quote()"
 endif

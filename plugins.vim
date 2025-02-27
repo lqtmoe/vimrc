@@ -6,6 +6,30 @@ scriptencoding utf-8
 "                   / .___/_/\__,_/\__, /_/_/ /_/____/                    "
 "==================/_/============/____/=================================="
 
+" カスタマイズ変数 {{{
+" プラグインの有無や振る舞いを変数で制御できるようにする
+
+" g:vimrc_denops_enable - denopsとdenopsに依存するプラグインを利用可能にする
+if !exists('g:vimrc_denops_enable')
+  let g:vimrc_denops_enable = v:version >= 901 && executable(get(g:, 'denops#deno', 'deno'))
+endif
+
+" g:vimrc_nerdfont_enable - NerdFontによる装飾を有効にする
+if !exists('g:vimrc_nerdfont_enable')
+  let g:vimrc_nerdfont_enable = 1
+endif
+
+" g:vimrc_input_method - インプットメソッドを選択する
+if !exists('g:vimrc_input_method')
+  if g:vimrc_denops_enable
+    let g:vimrc_input_method = 'skkeleton'
+  else
+    let g:vimrc_input_method = 'eskk'
+  endif
+endif
+
+" }}}
+
 " 標準プラグインの無効化 {{{
 
 " Netrw
@@ -34,8 +58,7 @@ Plug 'junegunn/vim-plug'
 
 " ライブラリ/フレームワーク {{{
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }  " 非同期実行ライブラリ
-let s:denops_enable = v:version >= 901 && executable(get(g:, 'denops#deno', 'deno'))
-if s:denops_enable
+if g:vimrc_denops_enable
   Plug 'vim-denops/denops.vim'  " TypeScript/JavaScriptベースのプラグインエコシステム
 endif
 Plug 'lambdalisue/nerdfont.vim'  " NerdFontグリフを取得
@@ -109,7 +132,9 @@ Plug 'cohama/lexima.vim'  " 括弧などを自動展開する
 Plug 'airblade/vim-rooter'  " ルートファインダ
 Plug 'tpope/vim-dispatch'  " 非同期にmakeを実行
 Plug 'mhinz/vim-grepper'  " 非同期にgrepを実行
-Plug 'vim-skk/eskk.vim'  " Vim版 SKK
+if g:vimrc_input_method == 'eskk'
+  Plug 'vim-skk/eskk.vim'  " Vim版 SKK
+endif
 Plug 'previm/previm'  " Markdown/Asciidocをプレビューする
 Plug 'preservim/tagbar'  " tagファイルを利用したアウトライン表示
 Plug 'tyru/open-browser.vim'  " URLをブラウザで開く
@@ -195,7 +220,7 @@ endif
 
 " denopsの設定 {{{
 
-if s:denops_enable
+if g:vimrc_denops_enable
   " 推奨設定(denops-recommended 参照)
   noremap <silent> <C-c> <Cmd>call denops#interrupt()<CR><C-c>
   inoremap <silent> <C-c> <Cmd>call denops#interrupt()<CR><C-c>
@@ -504,15 +529,10 @@ nnoremap <C-g> <Cmd>Grepper<CR>
 
 " eskkの設定 {{{
 
-" g:vimrc_eskk_disable - eskkを無効化する。
-if !exists('g:vimrc_eskk_disable')
-  let g:vimrc_eskk_disable = 0
-endif
+if g:vimrc_input_method == 'eskk'
+  let g:eskk#egg_like_newline = 1
+  let g:eskk#directory = g:vimrc_cache_dir . '/eskk'
 
-let g:eskk#egg_like_newline = 1
-let g:eskk#directory = g:vimrc_cache_dir . '/eskk'
-
-if !g:vimrc_eskk_disable
   " IMEとしてeskkを使用する
   set imdisable  " システムのIMEを無効化
 
@@ -532,9 +552,6 @@ if !g:vimrc_eskk_disable
   endfunction
 
   autocmd vimrc User eskk-initialize-post call s:lightline_register_eskk()
-else
-  let g:loaded_eskk = 1
-  let g:eskk#no_default_mappings = 1
 endif
 
 " }}}
@@ -588,12 +605,7 @@ unlet s:palette  " 後片付け
 " NerdFontの文字幅設定はvim-ambwidthに任せる
 let g:nerdfont#autofix_cellwidths = 0
 
-" g:vimrc_nerdfont_disable - NerdFontを使わない。
-if !exists('g:vimrc_nerdfont_disable')
-  let g:vimrc_nerdfont_disable = 0
-endif
-
-if !g:vimrc_nerdfont_disable
+if g:vimrc_nerdfont_enable
   " lightline {{{
   let g:lightline.separator = { 'left': "\ue0b0", 'right': "\ue0b6" }
   let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b7" }

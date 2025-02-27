@@ -132,6 +132,9 @@ Plug 'cohama/lexima.vim'  " 括弧などを自動展開する
 Plug 'airblade/vim-rooter'  " ルートファインダ
 Plug 'tpope/vim-dispatch'  " 非同期にmakeを実行
 Plug 'mhinz/vim-grepper'  " 非同期にgrepを実行
+if g:vimrc_input_method == 'skkeleton'
+  Plug 'vim-skk/skkeleton'  " Vim版 SKK
+endif
 if g:vimrc_input_method == 'eskk'
   Plug 'vim-skk/eskk.vim'  " Vim版 SKK
 endif
@@ -524,6 +527,41 @@ autocmd vimrc User Grepper copen
 command! -nargs=0 -bang GrepHere Grepper -noprompt -cword -dir file
 
 nnoremap <C-g> <Cmd>Grepper<CR>
+
+" }}}
+
+" skkeletonの設定 {{{
+
+if g:vimrc_input_method == 'skkeleton'
+  set imdisable  " システムのIMEを無効化
+
+  " キーマップ
+  imap <C-j> <Plug>(skkeleton-enable)
+  cmap <C-j> <Plug>(skkeleton-enable)
+  tmap <C-j> <Plug>(skkeleton-enable)
+
+  " 設定
+  let g:vimrc_skkeleton_config = {}
+  let g:vimrc_skkeleton_config.eggLikeNewline = v:true
+  autocmd vimrc User skkeleton-initialize-pre call skkeleton#config(g:vimrc_skkeleton_config)
+
+  " Lightline統合
+  function s:lightline_register_skkeleton()
+    if exists('g:lightline["component"]["skkmode"]')
+          \ && exists('g:lightline["component_visible_condition"]["skkmode"]')
+      let g:lightline['component']['skkmode'] =
+            \ '%{%skkeleton#is_enabled()?get({"hira":"あ","kata":"ア","hankata":"ｱ ","zenkaku":"Ａ","abbrev":"あ"},skkeleton#mode(),"Aa"):""%}'
+      let g:lightline['component_visible_condition']['skkmode'] = 'skkeleton#is_enabled()'
+    endif
+
+    if exists('g:loaded_lightline')
+      call lightline#init()
+      call lightline#update()
+    endif
+  endfunction
+
+  autocmd vimrc User skkeleton-initialize-post call s:lightline_register_skkeleton()
+endif
 
 " }}}
 

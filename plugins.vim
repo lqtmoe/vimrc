@@ -42,7 +42,7 @@ let g:loaded_netrwPlugin = 1
 
 " プラグイン登録 {{{
 
-let v:errmsg = ""
+let v:errmsg = ''
 silent! call plug#begin()
 
 " plug#begin()に失敗したら以降の読み込みを中止
@@ -363,7 +363,7 @@ augroup vimrc
 augroup END
 
 if g:vimrc_nerdfont_enable
-  let g:fern#renderer = "nerdfont"
+  let g:fern#renderer = 'nerdfont'
 endif
 
 " }}}
@@ -456,9 +456,9 @@ let g:startify_lists = [
       \ ]
 
 if executable('fortune')
-  let g:startify_custom_header = "systemlist('fortune')"
+  let g:startify_custom_header = 'systemlist("fortune")'
 else
-  let g:startify_custom_header = "startify#fortune#quote()"
+  let g:startify_custom_header = 'startify#fortune#quote()'
 endif
 
 " aでも挿入モードを開始

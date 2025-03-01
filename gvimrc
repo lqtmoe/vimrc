@@ -48,7 +48,7 @@ endif
 
 " フォント設定 {{{
 
-if has("gui_gtk")
+if has('gui_gtk')
   " for GTK UI {{{
   " fontconfigからフォント一覧を取得
   if exists('?systemlist')

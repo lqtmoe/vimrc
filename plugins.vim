@@ -266,7 +266,7 @@ let g:lightline = #{
       \   component: #{
       \     ruler: '%l,%c%V',
       \     filetype: '%{!empty(&ft)?&ft:"unknown"}',
-      \     fileencfmt: '%{!empty(&fenc)?&fenc:&enc"}(%{&ff})',
+      \     fileencfmt: '%{!empty(&fenc)?&fenc:&enc}(%{&ff})',
       \     imstate: ''
       \   },
       \   component_visible_condition: #{

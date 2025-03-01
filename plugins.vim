@@ -308,6 +308,21 @@ function! s:lightline_tab_modified(n)
   endfor
 endfunction
 
+if g:vimrc_nerdfont_enable
+  let g:lightline.separator = #{ left: "\ue0b0", right: "\ue0b6" }
+  let g:lightline.subseparator = #{ left: "\ue0b1", right: "\ue0b7" }
+  let g:lightline.tabline_separator = #{ left: "\ue0bc", right: "\ue0ba" }
+  let g:lightline.tabline_subseparator = #{ left: "\ue0bd", right: "\ue0bd" }
+  let g:lightline.component.filetype = '%{nerdfont#find()} %{!empty(&ft)?&ft:"unknown"}'
+  let g:lightline.tab_component_function.filename = expand('<SID>')..'lightline_tab_filename'
+
+  " アイコン付きのファイル名表示
+  function! s:lightline_tab_filename(n)
+    let l:filename = lightline#tab#filename(a:n)
+    return nerdfont#find(l:filename)..' '..l:filename
+  endfunction
+endif
+
 " 本体とlightlineのカラースキームを同期
 function! s:lightline_colorscheme_update(colors_name = get(g:, 'colors_name', 'default'))
   " 初期化
@@ -347,6 +362,10 @@ augroup vimrc
   autocmd FileType fern nmap <buffer><silent> <Left> <Plug>(fern-action-collapse)
 augroup END
 
+if g:vimrc_nerdfont_enable
+  let g:fern#renderer = "nerdfont"
+endif
+
 " }}}
 
 " vim-lspの設定 {{{
@@ -363,6 +382,11 @@ let g:lsp_max_buffer_size = 1024 * 1024
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_diagnostics_echo_delay = get(g:, 'cursorhold_updatetime', 300)
 let g:lsp_diagnostics_virtual_text_enabled = 0
+
+if g:vimrc_nerdfont_enable
+  let g:lsp_diagnostics_signs_error = #{ text: "\uf05e" }
+  let g:lsp_diagnostics_signs_warning = #{ text: "\uf071" }
+endif
 
 augroup vimrc
   autocmd User lsp_buffer_enabled setlocal tagfunc=lsp#tagfunc
@@ -474,6 +498,56 @@ let g:ambiwidth_cica_enabled = v:false
 
 " 後で追加できるように空のリストを宣言しておく
 let g:ambiwidth_add_list = []
+
+if g:vimrc_nerdfont_enable
+  " Nerd Fontsが提供するグリフの文字幅を定義
+  " https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
+  " Seti-UI + Custom
+  let g:ambiwidth_add_list += [[0xe5fa, 0xe62d, 2]]
+  " プラグイン側の定義と重複するためコメントアウト
+  "let g:ambiwidth_add_list += [[0xe62e, 0xe62e, 2]]
+  let g:ambiwidth_add_list += [[0xe62f, 0xe6b1, 2]]
+  " Devicons
+  let g:ambiwidth_add_list += [[0xe700, 0xe7c5, 2]]
+  " Font Awesome
+  let g:ambiwidth_add_list += [[0xf000, 0xf2e0, 2]]
+  " Font Awesome Extension
+  let g:ambiwidth_add_list += [[0xe200, 0xe2a9, 2]]
+  " Material Design Icons
+  let g:ambiwidth_add_list += [[0xf0001, 0xf1af0, 2]]
+  " Weather
+  let g:ambiwidth_add_list += [[0xe300, 0xe3e3, 2]]
+  " Octicons
+  let g:ambiwidth_add_list += [[0xf400, 0xf532, 2]]
+  " プラグイン側の定義と重複するためコメントアウト
+  "let g:ambiwidth_add_list += [[0x2665, 0x2665, 2]]
+  "let g:ambiwidth_add_list += [[0x26a1, 0x26a1, 2]]
+  " Powerline Symbols
+  " Powerline系グリフはフォントによって幅が異なるためコメントアウト
+  "let g:ambiwidth_add_list += [[0xe0a0, 0xe0a2, 2]]
+  "let g:ambiwidth_add_list += [[0xe0b0, 0xe0b3, 2]]
+  " Powerline Extra Symbols
+  " Powerline系グリフはフォントによって幅が異なるためコメントアウト
+  "let g:ambiwidth_add_list += [[0xe0a3, 0xe0a3, 2]]
+  "let g:ambiwidth_add_list += [[0xe0b4, 0xe0c8, 2]]
+  "let g:ambiwidth_add_list += [[0xe0ca, 0xe0ca, 2]]
+  "let g:ambiwidth_add_list += [[0xe0cc, 0xe0d4, 2]]
+  " IEC Power Symbols
+  let g:ambiwidth_add_list += [[0x23fb, 0x23fe, 2]]
+  let g:ambiwidth_add_list += [[0x2b58, 0x2b58, 2]]
+  " Font Logos
+  let g:ambiwidth_add_list += [[0xf300, 0xf314, 2]]
+  " プラグイン側の定義と重複するためコメントアウト
+  "let g:ambiwidth_add_list += [[0xf315, 0xf316, 2]]
+  let g:ambiwidth_add_list += [[0xf317, 0xf31a, 2]]
+  " プラグイン側の定義と重複するためコメントアウト
+  "let g:ambiwidth_add_list += [[0xf31b, 0xf31c, 2]]
+  let g:ambiwidth_add_list += [[0xf31d, 0xf372, 2]]
+  " Pomicons
+  let g:ambiwidth_add_list += [[0xe000, 0xe00a, 2]]
+  " Codicons
+  let g:ambiwidth_add_list += [[0xea60, 0xebeb, 2]]
+endif
 
 " }}}
 
@@ -635,86 +709,9 @@ unlet s:palette  " 後片付け
 " }}}
 
 " nerdfontの設定 {{{
-" 他のプラグインの設定を後から変える系が多いので下の方に置く
 
 " NerdFontの文字幅設定はvim-ambwidthに任せる
 let g:nerdfont#autofix_cellwidths = 0
-
-if g:vimrc_nerdfont_enable
-  " lightline {{{
-  let g:lightline.separator = #{ left: "\ue0b0", right: "\ue0b6" }
-  let g:lightline.subseparator = #{ left: "\ue0b1", right: "\ue0b7" }
-  let g:lightline.tabline_separator = #{ left: "\ue0bc", right: "\ue0ba" }
-  let g:lightline.tabline_subseparator = #{ left: "\ue0bd", right: "\ue0bd" }
-  let g:lightline.component.filetype = '%{nerdfont#find()} %{!empty(&ft)?&ft:"unknown"}'
-  let g:lightline.tab_component_function.filename = expand('<SID>')..'lightline_tab_filename'
-
-  " アイコン付きのファイル名表示
-  function! s:lightline_tab_filename(n)
-    let l:filename = lightline#tab#filename(a:n)
-    return nerdfont#find(l:filename)..' '..l:filename
-  endfunction
-  " }}}
-
-  " fern {{{
-  let g:fern#renderer = "nerdfont"
-  " }}}
-
-  " vim-lsp {{{
-  let g:lsp_diagnostics_signs_error = #{ text: "\uf05e" }
-  let g:lsp_diagnostics_signs_warning = #{ text: "\uf071" }
-  " }}}
-
-  " vim-ambiwidth {{{
-  " Nerd Fontsが提供するグリフの文字幅を定義
-  " https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
-  " Seti-UI + Custom
-  let g:ambiwidth_add_list += [[0xe5fa, 0xe62d, 2]]
-  " プラグイン側の定義と重複するためコメントアウト
-  "let g:ambiwidth_add_list += [[0xe62e, 0xe62e, 2]]
-  let g:ambiwidth_add_list += [[0xe62f, 0xe6b1, 2]]
-  " Devicons
-  let g:ambiwidth_add_list += [[0xe700, 0xe7c5, 2]]
-  " Font Awesome
-  let g:ambiwidth_add_list += [[0xf000, 0xf2e0, 2]]
-  " Font Awesome Extension
-  let g:ambiwidth_add_list += [[0xe200, 0xe2a9, 2]]
-  " Material Design Icons
-  let g:ambiwidth_add_list += [[0xf0001, 0xf1af0, 2]]
-  " Weather
-  let g:ambiwidth_add_list += [[0xe300, 0xe3e3, 2]]
-  " Octicons
-  let g:ambiwidth_add_list += [[0xf400, 0xf532, 2]]
-  " プラグイン側の定義と重複するためコメントアウト
-  "let g:ambiwidth_add_list += [[0x2665, 0x2665, 2]]
-  "let g:ambiwidth_add_list += [[0x26a1, 0x26a1, 2]]
-  " Powerline Symbols
-  " Powerline系グリフはフォントによって幅が異なるためコメントアウト
-  "let g:ambiwidth_add_list += [[0xe0a0, 0xe0a2, 2]]
-  "let g:ambiwidth_add_list += [[0xe0b0, 0xe0b3, 2]]
-  " Powerline Extra Symbols
-  " Powerline系グリフはフォントによって幅が異なるためコメントアウト
-  "let g:ambiwidth_add_list += [[0xe0a3, 0xe0a3, 2]]
-  "let g:ambiwidth_add_list += [[0xe0b4, 0xe0c8, 2]]
-  "let g:ambiwidth_add_list += [[0xe0ca, 0xe0ca, 2]]
-  "let g:ambiwidth_add_list += [[0xe0cc, 0xe0d4, 2]]
-  " IEC Power Symbols
-  let g:ambiwidth_add_list += [[0x23fb, 0x23fe, 2]]
-  let g:ambiwidth_add_list += [[0x2b58, 0x2b58, 2]]
-  " Font Logos
-  let g:ambiwidth_add_list += [[0xf300, 0xf314, 2]]
-  " プラグイン側の定義と重複するためコメントアウト
-  "let g:ambiwidth_add_list += [[0xf315, 0xf316, 2]]
-  let g:ambiwidth_add_list += [[0xf317, 0xf31a, 2]]
-  " プラグイン側の定義と重複するためコメントアウト
-  "let g:ambiwidth_add_list += [[0xf31b, 0xf31c, 2]]
-  let g:ambiwidth_add_list += [[0xf31d, 0xf372, 2]]
-  " Pomicons
-  let g:ambiwidth_add_list += [[0xe000, 0xe00a, 2]]
-  " Codicons
-  let g:ambiwidth_add_list += [[0xea60, 0xebeb, 2]]
-  " }}}
-endif
 
 " }}}
 

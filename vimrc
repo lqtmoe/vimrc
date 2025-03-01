@@ -292,6 +292,10 @@ vnoremap <C-]> g<C-]>
 nnoremap g<C-]> <C-]>
 vnoremap g<C-]> <C-]>
 
+" 繰り返し検索の方向を常に同じにする
+nnoremap <expr> n v:searchforward ? 'n' : 'N'
+nnoremap <expr> N v:searchforward ? 'N' : 'n'
+
 " 補完候補を<Tab>/<S-Tab>で選択する
 imap <expr> <Tab>   pumvisible() ? '<C-n>' : '<Tab>'
 imap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'

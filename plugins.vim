@@ -76,7 +76,6 @@ endif
 " 大型/多機能プラグイン {{{
 " lightline - statusline/tablineを良い感じにする
 Plug 'itchyny/lightline.vim'
-Plug 'halkn/lightline-lsp'  " vim-lspの状態をlightlineに表示する
 
 " Fern - ファイルエクスプローラ
 Plug 'lambdalisue/fern.vim'
@@ -84,14 +83,11 @@ Plug 'lambdalisue/fern-hijack.vim'  " NetrwをFernに置き換える
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'  " NerdFontを使用してアイコンを表示する
 Plug 'lambdalisue/vim-fern-git-status'  " Git連携
 
-" vim-lsp - Language Server Protocolサポート
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-
-" asyncomplete - 非同期補完
-if has('timers')
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'  " vim-lspと連携
+" lsp - Language Server Protocolサポート
+if has('vim9script')
+  Plug 'yegappan/lsp'
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'normen/vim-lsp-settings-adapter'
 endif
 
 " VSnip - コードスニペット
@@ -276,14 +272,12 @@ let g:lightline = #{
       \   component_function: {},
       \   component_function_visible_condition: {},
       \   component_expand: #{
-      \     lsp_warnings: 'lightline_lsp#warnings',
-      \     lsp_errors: 'lightline_lsp#errors',
-      \     lsp_ok: 'lightline_lsp#ok'
+      \     lsp_warnings: '',
+      \     lsp_errors: '',
       \   },
       \   component_type: #{
       \     lsp_warnings: 'warning',
       \     lsp_errors: 'error',
-      \     lsp_ok: 'middle'
       \   },
       \   component_raw: {},
       \   tab_component: {},
@@ -369,29 +363,52 @@ endif
 
 " }}}
 
-" vim-lspの設定 {{{
+" lspの設定 {{{
 
-let g:lsp_use_native_client = 1
-let g:lsp_semantic_enabled = 1
-let g:lsp_inlay_hints_enabled = 1
-let g:lsp_inlay_hints_mode = #{ normal: ['curline'] }
-let g:lsp_max_buffer_size = 1024 * 1024
-" 👀 vim-lsp/issues/1510
-"let g:lsp_diagnostics_float_cursor = 1
-"let g:lsp_diagnostics_float_insert_mode_enabled = 0
-"let g:lsp_diagnostics_float_delay = get(g:, 'cursorhold_updatetime', 300)
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_diagnostics_echo_delay = get(g:, 'cursorhold_updatetime', 300)
-let g:lsp_diagnostics_virtual_text_enabled = 0
+if has('vim9script')
+  let g:vimrc_lsp_options = {}
+  let g:vimrc_lsp_options.noNewlineInCompletion = v:true
+  let g:vimrc_lsp_options.semanticHighlight = v:true
+  let g:vimrc_lsp_options.showDiagWithVirtualText = v:true
+  let g:vimrc_lsp_options.diagVirtualTextAlign = 'below'
+  let g:vimrc_lsp_options.showInlayHints = v:true
+  let g:vimrc_lsp_options.snippetSupport = v:true
+  let g:vimrc_lsp_options.vsnipSupport = v:true
 
-if g:vimrc_nerdfont_enable
-  let g:lsp_diagnostics_signs_error = #{ text: "\uf05e" }
-  let g:lsp_diagnostics_signs_warning = #{ text: "\uf071" }
+  if g:vimrc_nerdfont_enable
+    let g:vimrc_lsp_options.diagSignErrorText = "\uf05e"
+    let g:vimrc_lsp_options.diagSignWarningText = "\uf071"
+  endif
+
+  " lightline統合
+  function! s:lightline_lsp_warnings()
+    let l:warnings = len(filter(lsp#diag#GetDiagsForBuf(), { _, val -> get(val, 'severity', 1) == 2 }))
+    if l:warnings == 0
+      return ''
+    endif
+    return (g:vimrc_nerdfont_enable ? "\uf071 " : 'W: ')..l:warnings
+  endfunction
+
+  function! s:lightline_lsp_errors()
+    let l:errors = len(filter(lsp#diag#GetDiagsForBuf(), { _, val -> get(val, 'severity', 1) == 1 }))
+    if l:errors == 0
+      return ''
+    endif
+    return (g:vimrc_nerdfont_enable ? "\uf05e " : 'E: ')..l:errors
+  endfunction
+
+  let g:lightline.component_expand.lsp_warnings = expand('<SID>')..'lightline_lsp_warnings'
+  let g:lightline.component_expand.lsp_errors = expand('<SID>')..'lightline_lsp_errors'
+
+  augroup vimrc
+    autocmd User LspSetup call LspOptionsSet(g:vimrc_lsp_options)
+    autocmd User LspAttached setlocal tagfunc=lsp#lsp#TagFunc
+    " <CR>のマップを外す
+    autocmd User LspAttached silent! iunmap <buffer> <CR>
+    " warnings/errorsをlightlineに反映する
+    autocmd User LspDiagsUpdated call lightline#update()
+  augroup END
 endif
-
-augroup vimrc
-  autocmd User lsp_buffer_enabled setlocal tagfunc=lsp#tagfunc
-augroup END
 
 " }}}
 
@@ -402,15 +419,6 @@ let g:lsp_settings = #{
       \     args: ['--clang-tidy', '--header-insertion=never']
       \   }
       \ }
-
-" }}}
-
-" asyncompleteの設定 {{{
-
-if has('timers')  " プラグイン無効であればキーマップ登録もしない
-  imap <C-space> <Plug>(asyncomplete_force_refresh)
-  imap <expr> <CR> pumvisible() ? asyncomplete#close_popup() : '<CR>'
-endif
 
 " }}}
 
@@ -571,8 +579,8 @@ nmap ga <Plug>(EasyAlign)
 let g:lexima_no_default_rules = 1
 call lexima#set_default_rules()
 
-" <CR>のマップを再定義(asyncompleteの設定も参照)
-inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() : lexima#expand('<CR>', 'i')
+" <CR>のマップを再定義
+imap <expr> <CR> pumvisible() ? '<C-y>' : lexima#expand('<CR>', 'i')
 
 " }}}
 

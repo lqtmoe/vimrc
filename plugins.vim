@@ -174,7 +174,7 @@ Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 " }}}
 
 " マシンローカルなプラグイン {{{
-let s:plug_local = g:vimrc_root_dir..'/plug_local.vim'
+let s:plug_local = g:vimrc_root_dir .. '/plug_local.vim'
 
 if filereadable(s:plug_local)
   execute 'source' s:plug_local
@@ -189,7 +189,7 @@ call plug#end()
 
 " 初回インストール {{{
 
-let s:first_install_marker = g:vimrc_root_dir..'/1st_inst'
+let s:first_install_marker = g:vimrc_root_dir .. '/1st_inst'
 
 if filewritable(g:vimrc_root_dir) == 2 && empty(glob(s:first_install_marker))
   call writefile(['1st PlugInstall command executed.'], s:first_install_marker)
@@ -282,7 +282,7 @@ let g:lightline = #{
       \   component_raw: {},
       \   tab_component: {},
       \   tab_component_function: #{
-      \     modified: expand('<SID>)')..'lightline_tab_modified'
+      \     modified: expand('<SID>)') .. 'lightline_tab_modified'
       \   },
       \   colorscheme: 'default',
       \   mode_map: {},
@@ -309,12 +309,12 @@ if g:vimrc_nerdfont_enable
   let g:lightline.tabline_separator = #{ left: "\ue0bc", right: "\ue0ba" }
   let g:lightline.tabline_subseparator = #{ left: "\ue0bd", right: "\ue0bd" }
   let g:lightline.component.filetype = '%{nerdfont#find()} %{!empty(&ft)?&ft:"unknown"}'
-  let g:lightline.tab_component_function.filename = expand('<SID>')..'lightline_tab_filename'
+  let g:lightline.tab_component_function.filename = expand('<SID>') .. 'lightline_tab_filename'
 
   " アイコン付きのファイル名表示
   function! s:lightline_tab_filename(n)
     let l:filename = lightline#tab#filename(a:n)
-    return nerdfont#find(l:filename)..' '..l:filename
+    return nerdfont#find(l:filename) .. ' ' .. l:filename
   endfunction
 endif
 
@@ -324,8 +324,8 @@ function! s:lightline_colorscheme_update(colors_name = get(g:, 'colors_name', 'd
   let g:lightline.colorscheme = 'default'
 
   for l:c in [a:colors_name, substitute(a:colors_name, '-', '_', 'g')]
-    if !empty(globpath(&rtp, 'autoload/lightline/colorscheme/'..l:c..'.vim'))
-          \ || exists('g:lightline#colorscheme#'..l:c..'#palette')
+    if !empty(globpath(&rtp, 'autoload/lightline/colorscheme/' .. l:c .. '.vim'))
+          \ || exists('g:lightline#colorscheme#' .. l:c .. '#palette')
       let g:lightline.colorscheme = l:c
       break
     endif
@@ -386,7 +386,7 @@ if has('vim9script')
     if l:warnings == 0
       return ''
     endif
-    return (g:vimrc_nerdfont_enable ? "\uf071 " : 'W: ')..l:warnings
+    return (g:vimrc_nerdfont_enable ? "\uf071 " : 'W: ') .. l:warnings
   endfunction
 
   function! s:lightline_lsp_errors()
@@ -394,11 +394,11 @@ if has('vim9script')
     if l:errors == 0
       return ''
     endif
-    return (g:vimrc_nerdfont_enable ? "\uf05e " : 'E: ')..l:errors
+    return (g:vimrc_nerdfont_enable ? "\uf05e " : 'E: ') .. l:errors
   endfunction
 
-  let g:lightline.component_expand.lsp_warnings = expand('<SID>')..'lightline_lsp_warnings'
-  let g:lightline.component_expand.lsp_errors = expand('<SID>')..'lightline_lsp_errors'
+  let g:lightline.component_expand.lsp_warnings = expand('<SID>') .. 'lightline_lsp_warnings'
+  let g:lightline.component_expand.lsp_errors = expand('<SID>') .. 'lightline_lsp_errors'
 
   augroup vimrc
     autocmd User LspSetup call LspOptionsSet(g:vimrc_lsp_options)
@@ -452,7 +452,7 @@ let g:vimwiki_toc_header_level = 2
 
 " Startifyの設定 {{{
 
-let g:startify_session_dir = g:vimrc_cache_dir..'/session'
+let g:startify_session_dir = g:vimrc_cache_dir .. '/session'
 let g:startify_files_number = 5
 
 let g:startify_bookmarks = []
@@ -658,7 +658,7 @@ if g:vimrc_input_method == 'eskk'
 
   " 設定
   let g:eskk#egg_like_newline = 1
-  let g:eskk#directory = g:vimrc_cache_dir..'/eskk'
+  let g:eskk#directory = g:vimrc_cache_dir .. '/eskk'
 
   " Lightline統合
   function s:lightline_register_eskk()

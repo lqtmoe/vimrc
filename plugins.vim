@@ -121,6 +121,7 @@ Plug 'osyo-manga/vim-brightest'  " カーソル下のキーワードをハイラ
 Plug 'junegunn/rainbow_parentheses.vim'  " 括弧のペアを色分けして表示する
 Plug 'rbtnn/vim-ambiwidth'  " set ambwidth=single で文字幅を適切に設定する
 Plug 'vim-scripts/AnsiEsc.vim'  " ANSIエスケープシーケンスを解釈する
+Plug 'machakann/vim-highlightedyank'  " ヤンクした範囲をハイライトする
 " }}}
 
 " 編集 {{{
@@ -548,6 +549,12 @@ if g:vimrc_nerdfont_enable
   " Codicons
   let g:ambiwidth_add_list += [[0xea60, 0xebeb, 2]]
 endif
+
+" }}}
+
+" highlightedyankの設定 {{{
+
+let g:highlightedyank_highlight_duration = 500
 
 " }}}
 

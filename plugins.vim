@@ -372,17 +372,20 @@ endif
 " vim-lspの設定 {{{
 
 let g:lsp_use_native_client = 1
+
+let g:lsp_diagnostics_echo_cursor = 0
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_float_insert_mode_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_semantic_enabled = 1
 let g:lsp_inlay_hints_enabled = 1
-let g:lsp_inlay_hints_mode = #{ normal: ['curline'] }
+
 let g:lsp_max_buffer_size = 1024 * 1024
-" 👀 vim-lsp/issues/1510
-"let g:lsp_diagnostics_float_cursor = 1
-"let g:lsp_diagnostics_float_insert_mode_enabled = 0
-"let g:lsp_diagnostics_float_delay = get(g:, 'cursorhold_updatetime', 300)
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_diagnostics_echo_delay = get(g:, 'cursorhold_updatetime', 300)
-let g:lsp_diagnostics_virtual_text_enabled = 0
+
+let g:lsp_inlay_hints_mode = #{ normal: ['curline'] }
+
+" 750未満に設定すると、ポップアップが正常に動作しない(vim-lsp/issues/1510)
+let g:lsp_diagnostics_float_delay = 750
 
 if g:vimrc_nerdfont_enable
   let g:lsp_diagnostics_signs_error = #{ text: "\uf05e" }

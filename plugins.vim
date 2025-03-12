@@ -251,7 +251,7 @@ set showtabline=1
 let g:lightline = #{
       \   active: #{
       \     left: [[ 'mode' ], [ 'filename' ], [ 'readonly', 'modified', 'truncate' ]],
-      \     right: [[ 'filetype', 'imstate', 'lsp_errors', 'lsp_warnings' ], [ 'percent' ], [ 'fileformat', 'fileencoding' ]]
+      \     right: [[ 'filetype', 'imstate', 'lsp_errors', 'lsp_warnings' ], [ 'percent' ], [ 'lsp_progress', 'fileformat', 'fileencoding' ]]
       \   },
       \   inactive: #{
       \     left: [[ 'filename' ], [ 'readonly', 'modified', 'truncate' ]],
@@ -273,7 +273,9 @@ let g:lightline = #{
       \     truncate: '0',
       \     imstate: '0',
       \   },
-      \   component_function: {},
+      \   component_function: #{
+      \     lsp_progress: expand('<SID>') .. 'lightline_lsp_progress'
+      \   },
       \   component_function_visible_condition: {},
       \   component_expand: #{
       \     lsp_warnings: 'lightline_lsp#warnings',
@@ -321,6 +323,20 @@ function! s:lightline_tab_modified(n)
       endif
     endif
   endfor
+endfunction
+
+" Language Serverの進捗状況を表示する
+function! s:lightline_lsp_progress()
+  let l:p = get(lsp#get_progress(), 0, {})
+  if !has_key(l:p, 'server') || !has_key(l:p, 'title')
+    return ''
+  endif
+
+  if has_key(l:p, 'percentage')
+    return $'{l:p.server}: {l:p.title}({l:p.percentage}%)'
+  else
+    return $'{l:p.server}: {l:p.title}'
+  endif
 endfunction
 
 if g:vimrc_nerdfont_enable
@@ -392,6 +408,7 @@ let g:lsp_diagnostics_float_cursor = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_semantic_enabled = 1
 let g:lsp_inlay_hints_enabled = 1
+let g:lsp_work_done_progress_enabled = 1
 
 let g:lsp_max_buffer_size = 1024 * 1024
 

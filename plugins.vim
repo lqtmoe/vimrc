@@ -250,11 +250,11 @@ set showtabline=1
 
 let g:lightline = #{
       \   active: #{
-      \     left: [[ 'mode', 'imstate' ], [ 'filename' ], [ 'readonly', 'modified' ]],
+      \     left: [[ 'mode', 'imstate' ], [ 'filename' ], [ 'readonly', 'modified', 'truncate' ]],
       \     right: [[ 'filetype', 'lsp_errors', 'lsp_warnings' ], [ 'percent' ], [ 'fileformat', 'fileencoding' ]]
       \   },
       \   inactive: #{
-      \     left: [[ 'filename' ], [ 'readonly', 'modified' ]],
+      \     left: [[ 'filename' ], [ 'readonly', 'modified', 'truncate' ]],
       \     right: [[ 'filetype' ], [ 'fileformat', 'fileencoding' ]]
       \   },
       \   tabline: #{
@@ -266,9 +266,11 @@ let g:lightline = #{
       \   },
       \   component: #{
       \     filetype: '%{!empty(&ft)?&ft:"unknown"}',
+      \     truncate: '%<',
       \     imstate: ''
       \   },
       \   component_visible_condition: #{
+      \     truncate: '0',
       \     imstate: '0',
       \   },
       \   component_function: {},
@@ -283,7 +285,9 @@ let g:lightline = #{
       \     lsp_errors: 'error',
       \     lsp_ok: 'middle'
       \   },
-      \   component_raw: {},
+      \   component_raw: #{
+      \     truncate: 1
+      \   },
       \   tab_component: {},
       \   tab_component_function: #{
       \     modified: expand('<SID>)') .. 'lightline_tab_modified'

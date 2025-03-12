@@ -251,11 +251,11 @@ set showtabline=1
 let g:lightline = #{
       \   active: #{
       \     left: [[ 'mode', 'imstate' ], [ 'filename' ], [ 'readonly', 'modified' ]],
-      \     right: [[ 'lsp_errors', 'lsp_warnings', 'filetype' ], [ 'ruler' ], [ 'fileencfmt' ]]
+      \     right: [[ 'filetype', 'lsp_errors', 'lsp_warnings' ], [ 'percent' ], [ 'fileformat', 'fileencoding' ]]
       \   },
       \   inactive: #{
       \     left: [[ 'filename' ], [ 'readonly', 'modified' ]],
-      \     right: [[ 'filetype' ], [ 'fileencfmt' ]]
+      \     right: [[ 'filetype' ], [ 'fileformat', 'fileencoding' ]]
       \   },
       \   tabline: #{
       \     left: [[ 'tabs' ]]
@@ -265,9 +265,7 @@ let g:lightline = #{
       \     inactive: [ 'filename', 'modified' ]
       \   },
       \   component: #{
-      \     ruler: '%l,%c%V',
       \     filetype: '%{!empty(&ft)?&ft:"unknown"}',
-      \     fileencfmt: '%{!empty(&fenc)?&fenc:&enc}(%{&ff})',
       \     imstate: ''
       \   },
       \   component_visible_condition: #{

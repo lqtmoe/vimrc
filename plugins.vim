@@ -250,8 +250,8 @@ set showtabline=1
 
 let g:lightline = #{
       \   active: #{
-      \     left: [[ 'mode', 'imstate' ], [ 'filename' ], [ 'readonly', 'modified', 'truncate' ]],
-      \     right: [[ 'filetype', 'lsp_errors', 'lsp_warnings' ], [ 'percent' ], [ 'fileformat', 'fileencoding' ]]
+      \     left: [[ 'mode' ], [ 'filename' ], [ 'readonly', 'modified', 'truncate' ]],
+      \     right: [[ 'filetype', 'imstate', 'lsp_errors', 'lsp_warnings' ], [ 'percent' ], [ 'fileformat', 'fileencoding' ]]
       \   },
       \   inactive: #{
       \     left: [[ 'filename' ], [ 'readonly', 'modified', 'truncate' ]],

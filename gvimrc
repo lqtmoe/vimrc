@@ -59,19 +59,19 @@ if has('gui_gtk')
 
   " 優先度の高い順にフォントの存在を確認
   " guifontにはフォントをひとつだけ設定する(複数設定しても先頭以外は無視される)
-  let s:fonts = [['UDEV Gothic NF'          , 12],
-        \        ['PlemolJP Console NFJ'    , 11],
-        \        ['PlemolJP Console NF'     , 11],
-        \        ['HackGen Console NFJ'     , 12],
-        \        ['UDEV Gothic'             , 12],
-        \        ['PlemolJP Console'        , 11],
-        \        ['HackGen Console'         , 12],
-        \        ['Ricty Discord'           , 12],
-        \        ['Ricty Dminished Discord' , 12],
-        \        ['Ricty'                   , 12],
-        \        ['Ricty Dminished'         , 12],
-        \        ['VL Gothic'               , 12],
-        \        ['monospace'               , 12]]
+  let s:fonts = [['UDEV Gothic NF'          , 11],
+        \        ['PlemolJP Console NFJ'    , 10],
+        \        ['PlemolJP Console NF'     , 10],
+        \        ['HackGen Console NFJ'     , 11],
+        \        ['UDEV Gothic'             , 11],
+        \        ['PlemolJP Console'        , 10],
+        \        ['HackGen Console'         , 11],
+        \        ['Ricty Discord'           , 11],
+        \        ['Ricty Dminished Discord' , 11],
+        \        ['Ricty'                   , 11],
+        \        ['Ricty Dminished'         , 11],
+        \        ['VL Gothic'               , 11],
+        \        ['monospace'               , 11]]
 
   for [s:font_name, s:font_size] in s:fonts
     if index(s:system_font_list, s:font_name) > -1
@@ -87,19 +87,19 @@ elseif has('gui_win32')
   " for Win32 UI {{{
   set guifont=  " リセット
   " 優先度の高い順にフォントを追加
-  set guifont+=UDEV_Gothic_NF:h12
-  set guifont+=PlemolJP_Console_NFJ:h11
-  set guifont+=PlemolJP_Console_NF:h11
-  set guifont+=HackGen_Console_NFJ:h12
-  set guifont+=HackGen_Console_NF:h12
-  set guifont+=UDEV_Gothic:h12
-  set guifont+=PlemolJP_Console:h11
-  set guifont+=HackGen_Console:h12
-  set guifont+=Ricty_Discord:h12
-  set guifont+=Ricty_Diminished_Discord:h12
-  set guifont+=Ricty:h12
-  set guifont+=Ricty_Dminished:h12
-  set guifont+=ＭＳ_ゴシック:h12
+  set guifont+=UDEV_Gothic_NF:h11
+  set guifont+=PlemolJP_Console_NFJ:h10
+  set guifont+=PlemolJP_Console_NF:h10
+  set guifont+=HackGen_Console_NFJ:h11
+  set guifont+=HackGen_Console_NF:h11
+  set guifont+=UDEV_Gothic:h11
+  set guifont+=PlemolJP_Console:h10
+  set guifont+=HackGen_Console:h11
+  set guifont+=Ricty_Discord:h11
+  set guifont+=Ricty_Diminished_Discord:h11
+  set guifont+=Ricty:h11
+  set guifont+=Ricty_Dminished:h11
+  set guifont+=ＭＳ_ゴシック:h11
 
   " レンダリングにDirectXを使う
   if has('directx')

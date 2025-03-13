@@ -122,6 +122,9 @@ Plug 'junegunn/rainbow_parentheses.vim'  " 括弧のペアを色分けして表�
 Plug 'rbtnn/vim-ambiwidth'  " set ambwidth=single で文字幅を適切に設定する
 Plug 'vim-scripts/AnsiEsc.vim'  " ANSIエスケープシーケンスを解釈する
 Plug 'machakann/vim-highlightedyank'  " ヤンクした範囲をハイライトする
+if executable('code-minimap')
+  Plug 'wfxr/minimap.vim'  " ミニマップを表示する
+endif
 " }}}
 
 " 編集 {{{
@@ -585,6 +588,16 @@ endif
 " highlightedyankの設定 {{{
 
 let g:highlightedyank_highlight_duration = 500
+
+" }}}
+
+" minimapの設定  {{{
+
+let g:minimap_highlight_range = 1
+let g:minimap_highlight_search = 1
+
+let g:minimap_block_filetypes = ['fugitive', 'fern', 'tagbar']
+let g:minimap_close_filetypes = ['startify', 'netrw', 'vim-plug']
 
 " }}}
 

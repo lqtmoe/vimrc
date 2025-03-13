@@ -647,8 +647,6 @@ autocmd vimrc User Grepper copen
 " GrepHere with Grepper
 command! -nargs=0 -bang GrepHere Grepper -noprompt -cword -dir file
 
-nnoremap <C-g> <Cmd>Grepper<CR>
-
 " }}}
 
 " skkeletonの設定 {{{

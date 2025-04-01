@@ -178,6 +178,7 @@ Plug 'rhysd/vim-color-spring-night'
 Plug 'yasukotelin/shirotelin'
 Plug 'mhinz/vim-janah'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'eihigh/vim-aomi-grayscale'
 " }}}
 
 " マシンローカルなプラグイン {{{

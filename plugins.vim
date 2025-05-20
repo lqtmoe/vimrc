@@ -71,6 +71,7 @@ Plug 'thinca/vim-ambicmd'  " 小文字で入力したコマンドを大文字に
 if has('timers') && v:version > 802
   Plug 'antoinemadec/FixCursorHold.nvim'  " 'updatetime'とCursorHoldの発生間隔を分離する
 endif
+Plug 'rickhowe/diffchar.vim'  " 文字単位/単語単位の差分をハイライトする
 " }}}
 
 " 大型/多機能プラグイン {{{

@@ -1,17 +1,19 @@
-= vimrc
-Biwa <lqt@nyarkafka.jp>
+# vimrc
 
 Biwa's vim initialization files.
 
-== 対応環境
+## 対応環境
+
 以下の環境で動くことを意識して記述する。
 
-=== 全機能
+### 全機能
+
 機能やプラグインは全て有効。
 
 * Vim >= 9.1 with Huge version
 
-=== 機能限定
+### 機能限定
+
 機能やプラグインの一部が無効になる。
 
 * 9.1 > Vim >= 8.2
@@ -19,7 +21,8 @@ Biwa's vim initialization files.
 
 KaoriYa版Vim、Slackware 15.0のVimを想定。
 
-=== プラグインなし
+### プラグインなし
+
 より多くの機能が無効になる。
 プラグインは読み込まない。
 
@@ -28,11 +31,12 @@ KaoriYa版Vim、Slackware 15.0のVimを想定。
 
 ディストリ標準搭載のTiny version、MS-DOS版Vimを想定。
 
-=== その他
+### その他
+
 試していない。
 恐らく何かしらが上手く動かない。
 
 * 7.1 > Vim
 * Mac
 * Neovim
-** そのうち対応するかも。
+  - そのうち対応するかも。

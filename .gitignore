@@ -1,10 +1,5 @@
-/1st_inst
+/rc/local
 /plugged
-/vimrc_local
-/vimrc_local_pre
-/gvimrc_local
-/gvimrc_local_pre
-/plug_local.vim
 autoload/plug.vim
 
 # https://github.com/github/gitignore/blob/main/Global/Vim.gitignore

@@ -1,3 +1,4 @@
+vim9script
 scriptencoding utf-8
 
 if !has('gui_running')
@@ -12,14 +13,11 @@ set guioptions-=m
 set guioptions-=b
 set guioptions-=l guioptions-=L
 set guioptions-=r guioptions-=R
-
-if has('kaoriya')
-  set guioptions+=C
-endif
+set guioptions+=C
 
 if has('vim_starting')
   set columns=140
   set lines=48
 endif
 
-" vim: et sw=2:
+# vim: et sw=2:

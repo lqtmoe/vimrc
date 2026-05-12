@@ -1,5 +1,4 @@
-/rc/local
-/plugged
+rc/local.vim
 autoload/plug.vim
 
 # https://github.com/github/gitignore/blob/main/Global/Vim.gitignore

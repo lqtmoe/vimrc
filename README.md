@@ -10,23 +10,16 @@ Biwa's vim initialization files.
 
 機能やプラグインは全て有効。
 
-* Vim >= 9.1 with Huge version
-
-### 機能限定
-
-機能やプラグインの一部が無効になる。
-
-* 9.1 > Vim >= 8.2
-* Normal version
-
-KaoriYa版Vim、Slackware 15.0のVimを想定。
+* Vim >= 9.2 with Huge version
 
 ### プラグインなし
 
+`vimrc_legacy`を使用
 より多くの機能が無効になる。
 プラグインは読み込まない。
 
-* 8.2 > Vim >= 7.1
+* 9.2 > Vim >= 7.1
+* Normal version
 * Tiny version
 
 ディストリ標準搭載のTiny version、MS-DOS版Vimを想定。
@@ -38,5 +31,3 @@ KaoriYa版Vim、Slackware 15.0のVimを想定。
 
 * 7.1 > Vim
 * Mac
-* Neovim
-  - そのうち対応するかも。

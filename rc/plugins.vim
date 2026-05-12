@@ -1,48 +1,45 @@
+vim9script
 scriptencoding utf-8
-
-if v:version < 802
-  finish
-endif
 
 if !&loadplugins
   finish
 endif
 
-" カスタマイズ変数
-" g:vimrc_denops_enable - denopsとdenopsに依存するプラグインを利用可能にする
+# カスタマイズ変数
+# g:vimrc_denops_enable - denopsとdenopsに依存するプラグインを利用可能にする
 if !exists('g:vimrc_denops_enable')
-  let g:vimrc_denops_enable = v:version >= 901 && executable(get(g:, 'denops#deno', 'deno'))
+  g:vimrc_denops_enable = executable(get(g:, 'denops#deno', 'deno'))
 endif
-" g:vimrc_nerdfont_enable - NerdFontによる装飾を有効にする
+# g:vimrc_nerdfont_enable - NerdFontによる装飾を有効にする
 if !exists('g:vimrc_nerdfont_enable')
-  let g:vimrc_nerdfont_enable = 1
+  g:vimrc_nerdfont_enable = 1
 endif
-" g:vimrc_input_method - インプットメソッドを選択する
+# g:vimrc_input_method - インプットメソッドを選択する
 if !exists('g:vimrc_input_method')
   if g:vimrc_denops_enable
-    let g:vimrc_input_method = 'skkeleton'
+    g:vimrc_input_method = 'skkeleton'
   else
-    let g:vimrc_input_method = 'eskk'
+    g:vimrc_input_method = 'eskk'
   endif
 endif
 
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/builtin.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/plug.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/denops.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/lightline.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/fern.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/lsp.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/fzf.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/startify.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/skk.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/vimwiki.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/tagbar.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/rooter.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/grepper.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/lexima.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/brightest.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/ambiwidth.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/nord.vim'
-execute 'source' g:vimrc_stdpath['config'] . '/rc/plugins/misc.vim'
+runtime rc/plugins/builtin.vim
+runtime rc/plugins/plug.vim
+runtime rc/plugins/denops.vim
+runtime rc/plugins/lightline.vim
+runtime rc/plugins/simplenine.vim
+runtime rc/plugins/fern.vim
+runtime rc/plugins/lsp.vim
+runtime rc/plugins/fzf.vim
+runtime rc/plugins/startify.vim
+runtime rc/plugins/skk.vim
+runtime rc/plugins/vimwiki.vim
+runtime rc/plugins/tagbar.vim
+runtime rc/plugins/rooter.vim
+runtime rc/plugins/grepper.vim
+runtime rc/plugins/lexima.vim
+runtime rc/plugins/brightest.vim
+runtime rc/plugins/ambiwidth.vim
+runtime rc/plugins/misc.vim
 
-" vim: et sw=2:
+# vim: et sw=2:

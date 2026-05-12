@@ -1,9 +1,9 @@
+vim9script
 scriptencoding utf-8
 
-execute 'source' g:vimrc_stdpath['config'] .. '/rc/core/backup.vim'
-execute 'source' g:vimrc_stdpath['config'] .. '/rc/core/statusline.vim'
-execute 'source' g:vimrc_stdpath['config'] .. '/rc/core/gui.vim'
-execute 'source' g:vimrc_stdpath['config'] .. '/rc/core/font.vim'
-execute 'source' g:vimrc_stdpath['config'] .. '/rc/core/syntax.vim'
+runtime rc/core/backup.vim
+runtime rc/core/gui.vim
+runtime rc/core/font.vim
+runtime rc/core/syntax.vim
 
-" vim: et sw=2:
+# vim: et sw=2:

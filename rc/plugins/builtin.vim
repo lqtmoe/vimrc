@@ -1,7 +1,8 @@
+vim9script
 scriptencoding utf-8
 
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
+g:loaded_netrw = 1
+g:loaded_netrwPlugin = 1
 
 if has('packages')
   packadd! matchit
@@ -13,4 +14,4 @@ if executable('man')
   runtime ftplugin/man.vim
 endif
 
-" vim: et sw=2:
+# vim: et sw=2:

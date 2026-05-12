@@ -1,14 +1,16 @@
+vim9script
 scriptencoding utf-8
+
+import "util.vim"
 
 set backup
 set writebackup
 set backupext=.bak~
 
-let s:backupdir = g:vimrc_stdpath['cache'] .. '/backup'
-call mkdir(s:backupdir, 'p')
-let &backupdir = s:backupdir .. '//'
-unlet s:backupdir
+var backupdir = util.StdPath("data") .. '/backup'
+call mkdir(backupdir, 'p')
+&backupdir = backupdir .. '//'
 
-autocmd BufWritePre * let &backupext = '.' .. strftime('%Y%m%d') .. '.bak~'
+autocmd BufWritePre * &backupext = '.' .. strftime('%Y%m%d') .. '.bak~'
 
-" vim: et sw=2:
+# vim: et sw=2:

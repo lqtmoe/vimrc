@@ -59,7 +59,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'mhinz/vim-startify'
 
 # 表示
-Plug '~/Documents/Sources/vim-simplenine'  # ステータスライン
+Plug 'lqtmoe/vim-simplenine'  # ステータスライン
 if has('signs')
   Plug 'mhinz/vim-signify'  # VCSから差分を取得し目印(sign)を表示する
   Plug 'kshenoy/vim-signature'  # マークに目印(sign)を表示する

@@ -61,13 +61,16 @@ var lsp_prog_com = simplenine.FunctionComponent.new(
   }
 )
 
-var components = simplenine#GetComponents()
-var idx = index(components, simplenine#components#separator) + 1
+simplenine#UpdateComponents(
+  (c: list<simplenine.Component>) => {
+    var idx = index(c, simplenine#components#separator) + 1
 
-components->insert(lsp_err_com, idx)
-components->insert(lsp_warn_com, idx)
-components->insert(lsp_prog_com, idx)
+    c->insert(lsp_err_com, idx)
+    c->insert(lsp_warn_com, idx)
+    c->insert(lsp_prog_com, idx)
 
-simplenine#SetComponents(components)
+    return c
+  }
+)
 
 # vim: et sw=2:

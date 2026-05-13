@@ -15,25 +15,23 @@ if g:vimrc_input_method == "skkeleton"
     eggLikeNewline: true
   }
 
-  def SetupSimpleNine()
-    var components = simplenine#GetComponents()
-
-    components->add(
-      simplenine.FunctionComponent.new(
-        (_: bool): string => get(
-          { hira: "あ", kata: "ア", hankata: "ｱ", zenkaku: "Ａ", abbrev: "あ" },
-          skkeleton#mode(),
-          "Aa"
-        ),
-        (active: bool): bool => active && skkeleton#is_enabled()
+  def SetupSimpleNineSkkeleton()
+    simplenine#UpdateComponents(
+      (c: list<simplenine.Component>) => c->add(
+        simplenine.FunctionComponent.new(
+          (_: bool): string => get(
+            { hira: "あ", kata: "ア", hankata: "ｱ", zenkaku: "Ａ", abbrev: "あ" },
+            skkeleton#mode(),
+            "Aa"
+          ),
+          (active: bool): bool => active && skkeleton#is_enabled()
+        )
       )
     )
-
-    simplenine#SetComponents(components)
   enddef
 
   autocmd vimrc User skkeleton-initialize-pre skkeleton#config(g:vimrc_skkeleton_config)
-  autocmd vimrc User skkeleton-initialize-post SetupSimpleNine()
+  autocmd vimrc User skkeleton-initialize-post SetupSimpleNineSkkeleton()
 endif
 
 if g:vimrc_input_method == "eskk"
@@ -42,24 +40,22 @@ if g:vimrc_input_method == "eskk"
   g:eskk#egg_like_newline = 1
   g:eskk#directory = util.StdPath("config") .. "/eskk"
 
-  def SetupSimpleNine()
-    var components = simplenine#GetComponents()
-
-    components->add(
-      simplenine.FunctionComponent.new(
-        (_: bool): string => get(
-          g:eskk#statusline_mode_strings,
-          eskk#get_mode(),
-          "Aa"
-        ),
-        (active: bool): bool => active && eskk#is_enabled()
+  def SetupSimpleNineEskk()
+    simplenine#UpdateComponents(
+      (c: list<simplenine.Component>) => c->add(
+        simplenine.FunctionComponent.new(
+          (_: bool): string => get(
+            g:eskk#statusline_mode_strings,
+            eskk#get_mode(),
+            "Aa"
+          ),
+          (active: bool): bool => active && eskk#is_enabled()
+        )
       )
     )
-
-    simplenine#SetComponents(components)
   enddef
 
-  autocmd vimrc User eskk-initialize-post SetupSimpleNine()
+  autocmd vimrc User eskk-initialize-post SetupSimpleNineEskk()
 endif
 
 # vim: et sw=2:

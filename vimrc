@@ -2,96 +2,30 @@ vim9script
 set encoding=utf-8
 scriptencoding utf-8
 
-import "util.vim"
-
 source $VIMRUNTIME/defaults.vim
 
-# 2 移動、検索とパターン
-set wrapscan
-if has("extra_search")
-  set incsearch
-endif
-set ignorecase
-set smartcase
+augroup vimrc | autocmd! | augroup END
 
-# 4 テキストの表示
-set nowrap
-set sidescroll=1
-set fillchars+=vert:┃
-set list
-set listchars=tab:^\ ,nbsp:.,extends:>,precedes:<
-set number
+import "util.vim"
 
-# 5 構文ハイライトとスペルチェック
-if has("extra_search")
-  set hlsearch
-endif
-set cursorline
+def LoadConfig(bang: bool, config: string)
+  var config_path = util.StdPath("config") .. "/rc/" .. config
+  if filereadable(config_path)
+    execute "source" fnameescape(config_path)
+  else
+    if !bang
+      echohl WarningMsg | echomsg "Failed to load file: " .. config | echohl None
+    endif
+  endif
+enddef
+command -nargs=1 -bang LoadConfig LoadConfig(<bang>0, <q-args>)
 
-# 6 複数ウィンドウ
-set splitright
-set splitbelow
+LoadConfig core.vim
+LoadConfig extra.vim
+LoadConfig plugins.vim
 
-# 12 メッセージと情報
-set noruler
-set showcmd
-set noshowmode
+LoadConfig! local.vim
 
-# 14 テキスト編集
-if has("persistent_undo")
-  set noundofile
-endif
-set completeopt=menuone,popuphidden,noinsert
-
-# 15 タブとインデント
-set autoindent
-
-# 17 差分モード
-set diffopt=internal,filler,closeoff,algorithm:histogram
-
-# 18 マッピング
-set notimeout
-set ttimeout
-
-# 20 スワップファイル
-set updatetime=1000
-
-# 21 コマンドライン編集
-set wildmenu
-set wildmode=full
-
-# 23 make の実行とエラーへのジャンプ (quickfix)
-if executable("rg")
-  set grepprg=rg\ --vimgrep\ --no-heading
-  set grepformat=%f:%l:%c:%m,%f:%l:%m
-endif
-
-#  キーマップ
-nnoremap <C-]> g<C-]>
-vnoremap <C-]> g<C-]>
-nnoremap g<C-]> <C-]>
-vnoremap g<C-]> <C-]>
-imap <expr> <Tab>   pumvisible() ? '<C-n>' : '<Tab>'
-imap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
-imap <expr> <CR> pumvisible() ? '<C-y>' : '<CR>'
-cmap <expr> <CR> wildmenumode() && getcmdline() =~ '[\\/]$' ? '<C-y>' : '<CR>'
-if has('extra_search')
-  nnoremap <Esc><Esc> <Cmd>nohlsearch<CR><Esc>
-endif
-
-#  自動コマンド
-augroup vimrc
-  autocmd!
-  autocmd WinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-  autocmd QuickfixCmdPost *grep* copen
-  autocmd TerminalWinOpen * setlocal nonumber
-  autocmd ColorScheme * highlight default link Terminal Normal
-augroup END
-
-#  追加ファイル読み込み
-runtime rc/core.vim
-runtime rc/plugins.vim
-runtime rc/local.vim
+delcommand LoadConfig
 
 # vim: et sw=2:

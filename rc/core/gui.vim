@@ -5,19 +5,19 @@ if !has('gui_running')
   finish
 endif
 
-set guioptions+=M
 set guioptions+=a
+set guioptions+=C
 set guioptions-=e
 set guioptions-=T
-set guioptions-=m
-set guioptions-=b
-set guioptions-=l guioptions-=L
+set guioptions-=m guioptions+=M
 set guioptions-=r guioptions-=R
-set guioptions+=C
+set guioptions-=l guioptions-=L
+set guioptions-=b
 
-if has('vim_starting')
-  set columns=140
-  set lines=48
+if has('directx')
+  set renderoptions=type:directx,renmode:5
 endif
+
+LoadConfig core/gui/font.vim
 
 # vim: et sw=2:

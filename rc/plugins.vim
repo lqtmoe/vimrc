@@ -23,23 +23,23 @@ if !exists('g:vimrc_input_method')
   endif
 endif
 
-runtime rc/plugins/builtin.vim
-runtime rc/plugins/plug.vim
-runtime rc/plugins/denops.vim
-runtime rc/plugins/lightline.vim
-runtime rc/plugins/simplenine.vim
-runtime rc/plugins/fern.vim
-runtime rc/plugins/lsp.vim
-runtime rc/plugins/fzf.vim
-runtime rc/plugins/startify.vim
-runtime rc/plugins/skk.vim
-runtime rc/plugins/vimwiki.vim
-runtime rc/plugins/tagbar.vim
-runtime rc/plugins/rooter.vim
-runtime rc/plugins/grepper.vim
-runtime rc/plugins/lexima.vim
-runtime rc/plugins/brightest.vim
-runtime rc/plugins/ambiwidth.vim
-runtime rc/plugins/misc.vim
+LoadConfig plugins/builtin.vim
+LoadConfig plugins/plug.vim
+LoadConfig plugins/denops.vim
+LoadConfig plugins/lightline.vim
+LoadConfig plugins/simplenine.vim
+LoadConfig plugins/fern.vim
+LoadConfig plugins/lsp.vim
+LoadConfig plugins/fzf.vim
+LoadConfig plugins/startify.vim
+LoadConfig plugins/skk.vim
+LoadConfig plugins/vimwiki.vim
+LoadConfig plugins/tagbar.vim
+LoadConfig plugins/rooter.vim
+LoadConfig plugins/grepper.vim
+LoadConfig plugins/lexima.vim
+LoadConfig plugins/brightest.vim
+LoadConfig plugins/ambiwidth.vim
+LoadConfig plugins/misc.vim
 
 # vim: et sw=2:

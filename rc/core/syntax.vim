@@ -1,9 +1,10 @@
 vim9script
 scriptencoding utf-8
 
-if !has('syntax')
-  finish
+if has("extra_search")
+  set hlsearch
 endif
+set cursorline
 
 # C/C++
 legacy let c_functions = 1

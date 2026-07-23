@@ -74,6 +74,8 @@ Plug 'machakann/vim-highlightedyank'  # ヤンクした範囲をハイライト�
 Plug 'tpope/vim-surround'  # テキスト周辺を編集する
 Plug 'junegunn/vim-easy-align'  # テキストを整形する
 Plug 'cohama/lexima.vim'  # 括弧などを自動展開する
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-repeat'
 
 # ユーティリティ
 Plug 'airblade/vim-rooter'  # ルートファインダ

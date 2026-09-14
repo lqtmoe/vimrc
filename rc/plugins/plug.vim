@@ -13,92 +13,78 @@ endif
 # プラグインマネージャ本体
 Plug 'junegunn/vim-plug'
 
-# ライブラリ/フレームワーク
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }  # 非同期実行ライブラリ
-Plug 'lambdalisue/nerdfont.vim'  # NerdFontグリフを取得
-Plug 'vim-jp/vital.vim'  # ユーティリティ関数群
+# ライブラリ
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'vim-jp/vital.vim'
 
 # Vim本体の機能を拡張/変更するプラグイン
-Plug 'thinca/vim-ambicmd'  # 小文字で入力したコマンドを大文字に補完する
-if has('timers') && v:version > 802
-  Plug 'antoinemadec/FixCursorHold.nvim'  # 'updatetime'とCursorHoldの発生間隔を分離する
-endif
-Plug 'rickhowe/diffchar.vim'  # 文字単位/単語単位の差分をハイライトする
+Plug 'thinca/vim-ambicmd'
+Plug 'antoinemadec/FixCursorHold.nvim'
 
 # 大型/多機能プラグイン
-# lightline - statusline/tablineを良い感じにする
+# lightline
 Plug 'itchyny/lightline.vim'
-Plug 'halkn/lightline-lsp'  # vim-lspの状態をlightlineに表示する
-# Fern - ファイルエクスプローラ
+# Fern
 Plug 'lambdalisue/fern.vim'
-Plug 'lambdalisue/fern-hijack.vim'  # NetrwをFernに置き換える
-Plug 'lambdalisue/fern-renderer-nerdfont.vim'  # NerdFontを使用してアイコンを表示する
-Plug 'lambdalisue/vim-fern-git-status'  # Git連携
-# vim-lsp - Language Server Protocolサポート
+Plug 'lambdalisue/fern-hijack.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/vim-fern-git-status'
+# vim-lsp
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
-# asyncomplete - 非同期補完
-if has('timers')
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'  # vim-lspと連携
-endif
-# VSnip - コードスニペット
+# asyncomplete
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+# VSnip
 Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ' # vim-lspと連携
-# QuickRun - タスクランナー
+Plug 'hrsh7th/vim-vsnip-integ'
+# QuickRun
 Plug 'thinca/vim-quickrun'
-# Fzf - ファジーファインダ
+# Fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-# VimWiki - 個人用Wiki
+# VimWiki
 Plug 'vimwiki/vimwiki'
-# Startify - スタートアップスクリーンとセッション管理
+# Startify
 Plug 'mhinz/vim-startify'
 
 # 表示
-Plug 'lqtmoe/vim-simplenine'  # ステータスライン
-if has('signs')
-  Plug 'mhinz/vim-signify'  # VCSから差分を取得し目印(sign)を表示する
-  Plug 'kshenoy/vim-signature'  # マークに目印(sign)を表示する
-endif
-Plug 'osyo-manga/vim-brightest'  # カーソル下のキーワードをハイライトする
-Plug 'junegunn/rainbow_parentheses.vim'  # 括弧のペアを色分けして表示する
-Plug 'rbtnn/vim-ambiwidth'  # set ambwidth=single で文字幅を適切に設定する
-Plug 'vim-scripts/AnsiEsc.vim'  # ANSIエスケープシーケンスを解釈する
-Plug 'machakann/vim-highlightedyank'  # ヤンクした範囲をハイライトする
+Plug 'lqtmoe/vim-simplenine'
+Plug 'mhinz/vim-signify'
+Plug 'kshenoy/vim-signature'
+Plug 'osyo-manga/vim-brightest'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'rbtnn/vim-ambiwidth'
+Plug 'vim-scripts/AnsiEsc.vim'
 
 # 編集
-Plug 'tpope/vim-surround'  # テキスト周辺を編集する
-Plug 'junegunn/vim-easy-align'  # テキストを整形する
-Plug 'cohama/lexima.vim'  # 括弧などを自動展開する
+Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
+Plug 'cohama/lexima.vim'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 
 # ユーティリティ
-Plug 'airblade/vim-rooter'  # ルートファインダ
-Plug 'tpope/vim-dispatch'  # 非同期にmakeを実行
-Plug 'mhinz/vim-grepper'  # 非同期にgrepを実行
-if g:vimrc_input_method == 'skkeleton'
-  Plug 'vim-skk/skkeleton'  # Vim版 SKK
-endif
-if g:vimrc_input_method == 'eskk'
-  Plug 'vim-skk/eskk.vim'  # Vim版 SKK
-endif
-Plug 'previm/previm'  # Markdown/Asciidocをプレビューする
-Plug 'preservim/tagbar'  # tagファイルを利用したアウトライン表示
-Plug 'tyru/open-browser.vim'  # URLをブラウザで開く
-Plug 'vim-jp/autofmt'  # 日本語の禁則処理に対応したテキスト整形
-Plug 'freitass/todo.txt-vim'  # todo.txt編集
-Plug 'tpope/vim-fugitive'  # Git wrapper
+Plug 'airblade/vim-rooter'
+Plug 'tpope/vim-dispatch'
+Plug 'mhinz/vim-grepper'
+Plug 'vim-skk/eskk.vim'
+Plug 'previm/previm'
+Plug 'preservim/tagbar'
+Plug 'tyru/open-browser.vim'
+Plug 'vim-jp/autofmt'
+Plug 'freitass/todo.txt-vim'
+Plug 'tpope/vim-fugitive'
 
 # ファイルタイプサポート
-Plug 'rust-lang/rust.vim'  # Rust
-Plug 'zah/nim.vim'  # Nim
-Plug 'aklt/plantuml-syntax'  # PlanetUML
-Plug 'vim-skk/skkdict.vim'  # SKK辞書
+Plug 'rust-lang/rust.vim'
+Plug 'zah/nim.vim'
+Plug 'aklt/plantuml-syntax'
+Plug 'vim-skk/skkdict.vim'
 
 # ドキュメント
-Plug 'vim-jp/vimdoc-ja'  # 日本語ドキュメント
+Plug 'vim-jp/vimdoc-ja'
 
 # カラースキーム
 Plug 'nordtheme/vim', { 'as': 'nordtheme' }

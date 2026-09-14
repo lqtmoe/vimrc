@@ -4,36 +4,6 @@ scriptencoding utf-8
 import "util.vim"
 import "simplenine.vim"
 
-if g:vimrc_input_method == "skkeleton"
-  set imdisable
-
-  imap <C-j> <Plug>(skkeleton-enable)
-  cmap <C-j> <Plug>(skkeleton-enable)
-  tmap <C-j> <Plug>(skkeleton-enable)
-
-  g:vimrc_skkeleton_config = {
-    eggLikeNewline: true
-  }
-
-  def SetupSimpleNineSkkeleton()
-    simplenine#UpdateComponents(
-      (c: list<simplenine.Component>) => c->add(
-        simplenine.FunctionComponent.new(
-          (_: bool): string => get(
-            { hira: "あ", kata: "ア", hankata: "ｱ", zenkaku: "Ａ", abbrev: "あ" },
-            skkeleton#mode(),
-            "Aa"
-          ),
-          (active: bool): bool => active && skkeleton#is_enabled()
-        )
-      )
-    )
-  enddef
-
-  autocmd vimrc User skkeleton-initialize-pre skkeleton#config(g:vimrc_skkeleton_config)
-  autocmd vimrc User skkeleton-initialize-post SetupSimpleNineSkkeleton()
-endif
-
 if g:vimrc_input_method == "eskk"
   set imdisable
 

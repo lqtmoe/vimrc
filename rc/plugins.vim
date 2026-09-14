@@ -6,26 +6,17 @@ if !&loadplugins
 endif
 
 # カスタマイズ変数
-# g:vimrc_denops_enable - denopsとdenopsに依存するプラグインを利用可能にする
-if !exists('g:vimrc_denops_enable')
-  g:vimrc_denops_enable = executable(get(g:, 'denops#deno', 'deno'))
-endif
 # g:vimrc_nerdfont_enable - NerdFontによる装飾を有効にする
 if !exists('g:vimrc_nerdfont_enable')
   g:vimrc_nerdfont_enable = 1
 endif
 # g:vimrc_input_method - インプットメソッドを選択する
 if !exists('g:vimrc_input_method')
-  if g:vimrc_denops_enable
-    g:vimrc_input_method = 'skkeleton'
-  else
-    g:vimrc_input_method = 'eskk'
-  endif
+  g:vimrc_input_method = 'eskk'
 endif
 
 LoadConfig plugins/builtin.vim
 LoadConfig plugins/plug.vim
-LoadConfig plugins/denops.vim
 LoadConfig plugins/lightline.vim
 LoadConfig plugins/simplenine.vim
 LoadConfig plugins/fern.vim

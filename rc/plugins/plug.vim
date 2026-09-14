@@ -15,9 +15,6 @@ Plug 'junegunn/vim-plug'
 
 # ライブラリ/フレームワーク
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }  # 非同期実行ライブラリ
-if g:vimrc_denops_enable
-  Plug 'vim-denops/denops.vim'  # TypeScript/JavaScriptベースのプラグインエコシステム
-endif
 Plug 'lambdalisue/nerdfont.vim'  # NerdFontグリフを取得
 Plug 'vim-jp/vital.vim'  # ユーティリティ関数群
 

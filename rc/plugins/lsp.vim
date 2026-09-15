@@ -1,8 +1,6 @@
 vim9script
 scriptencoding utf-8
 
-import "simplenine.vim"
-
 g:lsp_use_native_client = 1
 g:lsp_diagnostics_echo_cursor = 1
 g:lsp_diagnostics_float_cursor = 0
@@ -35,42 +33,5 @@ endif
 # 補完選択 → スニペットジャンプ → 通常キー入力
 imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
 imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
-
-var lsp_warn_com = simplenine.FunctionComponent.new(
-  (_: bool): string => (g:vimrc_nerdfont_enable ? "\uf071\u00a0" : "W:")
-    .. get(lsp#get_buffer_diagnostics_counts(), "warning", 0),
-  (_: bool): bool => get(lsp#get_buffer_diagnostics_counts(), "warning", 0) > 0
-)
-
-var lsp_err_com = simplenine.FunctionComponent.new(
-  (_: bool): string => (g:vimrc_nerdfont_enable ? "\uf05e\u00a0" : "E:")
-    .. get(lsp#get_buffer_diagnostics_counts(), "error", 0),
-  (_: bool): bool => get(lsp#get_buffer_diagnostics_counts(), "error", 0) > 0
-)
-
-var lsp_prog_com = simplenine.FunctionComponent.new(
-  (_: bool): string => {
-    var progress = get(lsp#get_progress(), 0, {})
-    return get(progress, "server") .. ":\u00a0"
-      .. get(progress, "title", "")
-      .. (has_key(progress, "percentage") ? "(" .. progress.percentage .. "%)" : "")
-  },
-  (_: bool): bool => {
-    var progress = get(lsp#get_progress(), 0, {})
-    return has_key(progress, "server") && has_key(progress, "title")
-  }
-)
-
-simplenine#UpdateComponents(
-  (c: list<simplenine.Component>) => {
-    var idx = index(c, simplenine#components#separator) + 1
-
-    c->insert(lsp_err_com, idx)
-    c->insert(lsp_warn_com, idx)
-    c->insert(lsp_prog_com, idx)
-
-    return c
-  }
-)
 
 # vim: et sw=2:

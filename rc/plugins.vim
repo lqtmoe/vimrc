@@ -18,7 +18,6 @@ endif
 LoadConfig plugins/builtin.vim
 LoadConfig plugins/plug.vim
 LoadConfig plugins/lightline.vim
-LoadConfig plugins/simplenine.vim
 LoadConfig plugins/fern.vim
 LoadConfig plugins/lsp.vim
 LoadConfig plugins/fzf.vim

@@ -50,7 +50,6 @@ Plug 'vimwiki/vimwiki'
 Plug 'mhinz/vim-startify'
 
 # 表示
-Plug 'lqtmoe/vim-simplenine'
 Plug 'mhinz/vim-signify'
 Plug 'kshenoy/vim-signature'
 Plug 'osyo-manga/vim-brightest'

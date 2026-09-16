@@ -23,9 +23,6 @@ g:previm_enable_realtime = 1
 minpac#add('antoinemadec/FixCursorHold.nvim')
 g:cursorhold_updatetime = 300
 
-# highlightedyank
-g:highlightedyank_highlight_duration = 500
-
 # nerdfont
 minpac#add('lambdalisue/nerdfont.vim')
 g:nerdfont#autofix_cellwidths = 0

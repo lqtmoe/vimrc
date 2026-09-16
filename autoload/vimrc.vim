@@ -4,7 +4,7 @@ scriptencoding utf-8
 # インプットメソッドを選択する
 g:vimrc#input_method = "eskk"
 
-# NerdFontによる装飾を有効にする
-g:vimrc#nerdfont_enable = true
+# Nerd Fontsによる装飾を有効にする
+g:vimrc#nerdfonts_enable = true
 
 # vim: et sw=2:

@@ -1,9 +1,7 @@
 vim9script
 scriptencoding utf-8
 
-import "util.vim"
-
-var minpac_path = util.SplitOption(&packpath)[0] .. "/pack/minpac/opt/minpac"
+var minpac_path = vimrc#util#SplitOption(&packpath)[0] .. "/pack/minpac/opt/minpac"
 if !isdirectory(minpac_path)
   echo "Install k-takata/minpac"
   mkdir(fnamemodify(minpac_path, ":p"), "p")

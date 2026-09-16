@@ -1,11 +1,9 @@
 vim9script
 scriptencoding utf-8
 
-import "util.vim"
-
 minpac#add('mhinz/vim-startify')
 
-g:startify_session_dir = util.StdPath("state") .. '/session'
+g:startify_session_dir = vimrc#util#StdPath("state") .. '/session'
 g:startify_files_number = 5
 g:startify_bookmarks = []
 g:startify_commands = []

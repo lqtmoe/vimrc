@@ -6,10 +6,8 @@ source $VIMRUNTIME/defaults.vim
 
 augroup vimrc | autocmd! | augroup END
 
-import "util.vim"
-
 def LoadConfig(bang: bool, config: string)
-  var config_path = util.StdPath("config") .. "/rc/" .. config
+  var config_path = vimrc#util#StdPath("config") .. "/rc/" .. config
   if filereadable(config_path)
     execute "source" fnameescape(config_path)
   else

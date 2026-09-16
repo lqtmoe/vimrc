@@ -3,7 +3,7 @@ scriptencoding utf-8
 
 minpac#add('vim-skk/eskk.vim')
 
-if g:vimrc_input_method == "eskk"
+if vimrc#input_method == "eskk"
   set imdisable
 
   g:eskk#egg_like_newline = 1

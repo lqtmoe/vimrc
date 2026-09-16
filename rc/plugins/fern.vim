@@ -15,7 +15,7 @@ augroup vimrc
   autocmd FileType fern nmap <buffer><silent> <Left> <Plug>(fern-action-collapse)
 augroup END
 
-if g:vimrc_nerdfont_enable
+if vimrc#nerdfont_enable
   g:fern#renderer = 'nerdfont'
 endif
 

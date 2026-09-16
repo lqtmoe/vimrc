@@ -5,16 +5,6 @@ if !&loadplugins
   finish
 endif
 
-# カスタマイズ変数
-# g:vimrc_nerdfont_enable - NerdFontによる装飾を有効にする
-if !exists('g:vimrc_nerdfont_enable')
-  g:vimrc_nerdfont_enable = 1
-endif
-# g:vimrc_input_method - インプットメソッドを選択する
-if !exists('g:vimrc_input_method')
-  g:vimrc_input_method = 'eskk'
-endif
-
 LoadConfig plugins/builtin.vim
 LoadConfig plugins/minpac.vim
 LoadConfig plugins/lightline.vim

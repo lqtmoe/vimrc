@@ -62,7 +62,7 @@ def LightlineTabModified(n: number): string
   return null_string
 enddef
 
-if vimrc#nerdfont_enable
+if g:vimrc#nerdfont_enable
   g:lightline.separator = { left: "\ue0b0", right: "\ue0b6" }
   g:lightline.subseparator = { left: "\ue0b1", right: "\ue0b7" }
   g:lightline.tabline_separator = { left: "\ue0bc", right: "\ue0ba" }

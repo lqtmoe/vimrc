@@ -1,10 +1,10 @@
 vim9script
 scriptencoding utf-8
 
-# vimrc#input_method - インプットメソッドを選択する
-export var input_method: string = "eskk"
+# インプットメソッドを選択する
+g:vimrc#input_method = "eskk"
 
-# vimrc#nerdfont_enable - NerdFontによる装飾を有効にする
-export var nerdfont_enable: bool = true
+# NerdFontによる装飾を有効にする
+g:vimrc#nerdfont_enable = true
 
 # vim: et sw=2:

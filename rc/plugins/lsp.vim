@@ -17,7 +17,7 @@ g:lsp_inlay_hints_enabled = 1
 g:lsp_work_done_progress_enabled = 1
 g:lsp_max_buffer_size = 1024 * 1024
 g:lsp_inlay_hints_mode = { normal: ['curline'] }
-if vimrc#nerdfont_enable
+if g:vimrc#nerdfont_enable
   g:lsp_diagnostics_signs_error = { text: "\uf05e" }
   g:lsp_diagnostics_signs_warning = { text: "\uf071" }
 endif

@@ -6,7 +6,7 @@ minpac#add('rbtnn/vim-ambiwidth')
 g:ambiwidth_add_list = []
 g:ambiwidth_cica_enabled = v:false
 
-if vimrc#nerdfont_enable
+if g:vimrc#nerdfont_enable
   # https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
   # Seti-UI + Custom
   g:ambiwidth_add_list->add([0xe5fa, 0xe62d, 2])

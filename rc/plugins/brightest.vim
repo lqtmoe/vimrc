@@ -1,6 +1,8 @@
 vim9script
 scriptencoding utf-8
 
+minpac#add('osyo-manga/vim-brightest')
+
 g:brightest#enable_on_CursorHold = 1
 g:brightest#highlight = { group: 'Visual' }
 if exists('##ModeChanged')

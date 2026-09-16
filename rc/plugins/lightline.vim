@@ -1,6 +1,8 @@
 vim9script
 scriptencoding utf-8
 
+minpac#add('itchyny/lightline.vim')
+
 set noshowmode
 set laststatus=2
 set showtabline=1

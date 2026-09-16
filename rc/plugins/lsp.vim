@@ -1,6 +1,13 @@
 vim9script
 scriptencoding utf-8
 
+minpac#add('prabirshrestha/vim-lsp')
+minpac#add('mattn/vim-lsp-settings')
+minpac#add('prabirshrestha/asyncomplete.vim')
+minpac#add('prabirshrestha/asyncomplete-lsp.vim')
+minpac#add('hrsh7th/vim-vsnip')
+minpac#add('hrsh7th/vim-vsnip-integ')
+
 g:lsp_use_native_client = 1
 g:lsp_diagnostics_echo_cursor = 1
 g:lsp_diagnostics_float_cursor = 0

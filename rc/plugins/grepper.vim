@@ -1,6 +1,8 @@
 vim9script
 scriptencoding utf-8
 
+minpac#add('mhinz/vim-grepper')
+
 g:grepper = {}
 g:grepper.tools = ['git', 'rg', 'grep', 'findstr']
 

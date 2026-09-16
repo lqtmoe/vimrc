@@ -3,6 +3,8 @@ scriptencoding utf-8
 
 import "util.vim"
 
+minpac#add('vim-skk/eskk.vim')
+
 if g:vimrc_input_method == "eskk"
   set imdisable
 

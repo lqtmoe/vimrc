@@ -1,6 +1,8 @@
 vim9script
 scriptencoding utf-8
 
+minpac#add('vimwiki/vimwiki')
+
 g:vimwiki_global_ext = 0
 g:vimwiki_hl_headers = 1
 g:vimwiki_auto_chdir = 1

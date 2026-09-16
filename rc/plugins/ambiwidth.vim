@@ -1,6 +1,8 @@
 vim9script
 scriptencoding utf-8
 
+minpac#add('rbtnn/vim-ambiwidth')
+
 g:ambiwidth_add_list = []
 g:ambiwidth_cica_enabled = v:false
 

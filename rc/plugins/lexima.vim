@@ -1,6 +1,8 @@
 vim9script
 scriptencoding utf-8
 
+minpac#add('cohama/lexima.vim')
+
 g:lexima_no_default_rules = 1
 call lexima#set_default_rules()
 

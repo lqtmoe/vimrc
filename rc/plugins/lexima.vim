@@ -3,10 +3,6 @@ scriptencoding utf-8
 
 minpac#add('cohama/lexima.vim')
 
-g:lexima_no_default_rules = 1
-call lexima#set_default_rules()
-
-# <CR>のマップを再定義(asyncompleteの設定も参照)
-inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() : lexima#expand('<CR>', 'i')
+g:lexima_accept_pum_with_enter = 1
 
 # vim: et sw=2:

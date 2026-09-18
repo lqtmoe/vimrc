@@ -20,7 +20,7 @@ export def StdPath(what: string): string
   elseif what == "state"
     return STD_PATH_STATE
   else
-    echoerr $"util.StdPath: \"{what}\" is not a valid stdpath"
+    echoerr $"vimrc#util#StdPath: \"{what}\" is not a valid stdpath"
     return null_string
   endif
 enddef

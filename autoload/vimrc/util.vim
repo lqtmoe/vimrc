@@ -25,4 +25,17 @@ export def StdPath(what: string): string
   endif
 enddef
 
+var reloading = false
+
+export def Reload()
+  if v:vim_did_init && !reloading
+    reloading = true
+    echo $"vimrc#util#Reload: Reload \"{$MYVIMRC}\""
+    execute 'source' $MYVIMRC
+    reloading = false
+  else
+    echoerr "vimrc#util#Reload: Cannot reload recursively"
+  endif
+enddef
+
 # vim: et sw=2:

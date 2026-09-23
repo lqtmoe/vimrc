@@ -3,11 +3,19 @@ scriptencoding utf-8
 
 var minpac_path = vimrc#util#SplitOption(&packpath)[0] .. "/pack/minpac/opt/minpac"
 if !isdirectory(minpac_path)
+  g:vimrc#first_install_progress = true
+
   echo "Install k-takata/minpac"
   mkdir(fnamemodify(minpac_path, ":p"), "p")
   execute "!git clone https://github.com/k-takata/minpac.git " .. shellescape(minpac_path)
 
-  autocmd vimrc VimEnter * minpac#update()
+  def FinishInstallCb(_, _, _)
+    g:vimrc#first_install_progress = false
+    vimrc#util#Reload()
+    packloadall!
+  enddef
+
+  autocmd vimrc VimEnter * minpac#update("", { do: FinishInstallCb })
 endif
 
 packadd minpac

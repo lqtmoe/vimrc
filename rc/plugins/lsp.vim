@@ -42,10 +42,60 @@ if executable("rust-analyzer")
   })
 endif
 
+def LspErrorCount(): string
+  var count = len(filter(
+    lsp#diag#GetDiagsForBuf(),
+    (_, val) => val.severity == 1
+  ))
+
+  if count > 0
+    return (g:vimrc#nerdfonts_enable ? "\uf05e " : "E:") .. count
+  else
+    return null_string
+  endif
+enddef
+
+def LspWarningCount(): string
+  var count = len(filter(
+    lsp#diag#GetDiagsForBuf(),
+    (_, val) => val.severity == 2
+  ))
+
+  if count > 0
+    return (g:vimrc#nerdfonts_enable ? "\uf071 " : "E:") .. count
+  else
+    return null_string
+  endif
+enddef
+
 augroup vimrc
   autocmd User LspSetup {
     if !empty(g:vimrc#lsp_servers)
       g:LspAddServer(deepcopy(g:vimrc#lsp_servers))
+    endif
+  }
+
+  autocmd User LspSetup {
+    g:lightline.component_expand->extend({
+      "lsp_error": expand("<SID>") .. "LspErrorCount",
+      "lsp_warning": expand("<SID>") .. "LspWarningCount" }
+    )
+    g:lightline.component_type->extend({
+      "lsp_error": "error",
+      "lsp_warning": "warning" }
+    )
+    g:lightline.active.right[0]->insert("lsp_error")
+    g:lightline.active.right[0]->insert("lsp_warning")
+
+    if exists('g:loaded_lightline')
+      lightline#init()
+      lightline#update()
+    endif
+  }
+
+  autocmd User LspDiagsUpdated {
+    if exists('g:loaded_lightline')
+      lightline#update()
     endif
   }
 

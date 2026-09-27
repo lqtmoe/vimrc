@@ -17,7 +17,8 @@ g:lightline = {
     right: [[ 'filetype' ], [ 'fileformat', 'fileencoding' ]]
   },
   tabline: {
-    left: [[ 'tabs' ]]
+    left: [[ 'tabs' ]],
+    right: [[ 'close' ]]
   },
   tab: {
     active: [ 'filename', 'modified' ],
@@ -26,7 +27,12 @@ g:lightline = {
   component: {
     filetype: '%{!empty(&ft)?&ft:"unknown"}',
   },
+  component_visible_condition: {},
   component_function_visible_condition: {},
+  component_expand: {},
+  component_type: {},
+  component_raw: {},
+  tab_component: {},
   tab_component_function: {
     modified: expand('<SID>)') .. 'LightlineTabModified'
   },

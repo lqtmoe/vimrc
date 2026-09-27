@@ -26,15 +26,16 @@ export def StdPath(what: string): string
 enddef
 
 export def SystemList(expr: list<string>): list<string>
-  var output: list<string> = []
+  var tmpfile = tempname()
+  defer delete(tmpfile)
 
   var job_object = job_start(
     expr,
     {
       in_io: "null",
       err_io: "null",
-      out_cb: (_, msg) => output->add(msg),
-      out_mode: "nl",
+      out_io: "file",
+      out_name: tmpfile,
     }
   )
 
@@ -42,7 +43,7 @@ export def SystemList(expr: list<string>): list<string>
     sleep 10m
   endwhile
 
-  return output
+  return filereadable(tmpfile) ? readfile(tmpfile) : []
 enddef
 
 export def System(expr: list<string>): string

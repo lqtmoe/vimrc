@@ -69,10 +69,10 @@ def LightlineTabModified(n: number): string
 enddef
 
 if g:vimrc#nerdfonts_enable
-  g:lightline.separator = { left: "\ue0b0", right: "\ue0b6" }
-  g:lightline.subseparator = { left: "\ue0b1", right: "\ue0b7" }
-  g:lightline.tabline_separator = { left: "\ue0bc", right: "\ue0ba" }
-  g:lightline.tabline_subseparator = { left: "\ue0bd", right: "\ue0bd" }
+  g:lightline.separator = { left: "\ue0b8", right: "\ue0ba" }
+  g:lightline.subseparator = { left: "\ue0b9", right: "\ue0bb" }
+  g:lightline.tabline_separator = { left: "\ue0bc", right: "\ue0be" }
+  g:lightline.tabline_subseparator = { left: "\ue0bd", right: "\ue0bf" }
   g:lightline.component.filetype = '%{nerdfont#find()} %{!empty(&ft)?&ft:"unknown"}'
   g:lightline.tab_component_function.filename = expand('<SID>') .. 'LightlineTabFilename'
 

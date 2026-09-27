@@ -47,6 +47,33 @@ export def System(cmdline: list<string>, options: dict<any> = {}): string
   return SystemList(cmdline, options)->join("\\n")
 enddef
 
+var system_font_list = null_list
+
+def GetSystemFontList_FontConfig(): list<string>
+  if !executable("fc-list")
+    return []
+  endif
+
+  return SystemList(
+    ["fc-list", "--format=%{family[0]}\\n"],
+    { env: { LC_ALL: "C" } }
+  )
+enddef
+
+export def GetSystemFontList(force_update: bool = false): list<string>
+  if system_font_list isnot null_list && !force_update
+    return system_font_list
+  endif
+
+  system_font_list = []
+
+  if has("gui_gtk")
+    system_font_list = GetSystemFontList_FontConfig()
+  endif
+
+  return copy(system_font_list)
+enddef
+
 var reloading = false
 
 export def Reload()

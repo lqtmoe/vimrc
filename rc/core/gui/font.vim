@@ -17,7 +17,7 @@ const FONTS = [
 ]
 
 if has('gui_gtk') && executable("fc-list")
-  var system_font_list = systemlist("env LC_ALL=C fc-list --format='%{family[0]}\\n'")
+  var system_font_list = vimrc#util#GetSystemFontList()
   set guifont=monospace\ 11
   for [font_name, font_size, is_nerdfonts] in FONTS
     if index(system_font_list, font_name) > -1

@@ -25,6 +25,28 @@ export def StdPath(what: string): string
   endif
 enddef
 
+export def SystemList(cmdline: list<string>, options: dict<any> = {}): list<string>
+  var output: list<string> = []
+  var job_options = {
+      in_io: "null",
+      err_io: "null",
+      out_cb: (_, msg) => output->add(msg),
+      out_mode: "nl",
+  }->extend(options, "keep")
+
+  var job_object = job_start(cmdline, job_options)
+
+  while job_status(job_object) == "run"
+    sleep 10m
+  endwhile
+
+  return output
+enddef
+
+export def System(cmdline: list<string>, options: dict<any> = {}): string
+  return SystemList(cmdline, options)->join("\\n")
+enddef
+
 var reloading = false
 
 export def Reload()

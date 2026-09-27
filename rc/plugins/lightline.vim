@@ -28,6 +28,7 @@ g:lightline = {
     filetype: '%{!empty(&ft)?&ft:"unknown"}',
   },
   component_visible_condition: {},
+  component_function: {},
   component_function_visible_condition: {},
   component_expand: {},
   component_type: {},

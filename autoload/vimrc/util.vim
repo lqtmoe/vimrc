@@ -25,16 +25,18 @@ export def StdPath(what: string): string
   endif
 enddef
 
-export def SystemList(cmdline: list<string>, options: dict<any> = {}): list<string>
+export def SystemList(expr: list<string>): list<string>
   var output: list<string> = []
-  var job_options = {
+
+  var job_object = job_start(
+    expr,
+    {
       in_io: "null",
       err_io: "null",
       out_cb: (_, msg) => output->add(msg),
       out_mode: "nl",
-  }->extend(options, "keep")
-
-  var job_object = job_start(cmdline, job_options)
+    }
+  )
 
   while job_status(job_object) == "run"
     sleep 10m
@@ -43,8 +45,8 @@ export def SystemList(cmdline: list<string>, options: dict<any> = {}): list<stri
   return output
 enddef
 
-export def System(cmdline: list<string>, options: dict<any> = {}): string
-  return SystemList(cmdline, options)->join("\\n")
+export def System(expr: list<string>): string
+  return SystemList(expr)->join("\\n")
 enddef
 
 var system_font_list = null_list
@@ -54,10 +56,7 @@ def GetSystemFontList_FontConfig(): list<string>
     return []
   endif
 
-  return SystemList(
-    ["fc-list", "--format=%{family[0]}\\n"],
-    { env: { LC_ALL: "C" } }
-  )
+  return SystemList(["env", "LC_ALL=C", "fc-list", "--format=%{family[0]}\\n"])
 enddef
 
 export def GetSystemFontList(force_update: bool = false): list<string>

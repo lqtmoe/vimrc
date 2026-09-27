@@ -62,7 +62,7 @@ def LspWarningCount(): string
   ))
 
   if count > 0
-    return (g:vimrc#nerdfonts_enable ? "\uf071 " : "E:") .. count
+    return (g:vimrc#nerdfonts_enable ? "\uf071 " : "W:") .. count
   else
     return null_string
   endif

@@ -2,8 +2,6 @@ vim9script
 scriptencoding utf-8
 
 minpac#add('yegappan/lsp')
-minpac#add('mattn/vim-lsp-settings')
-minpac#add('normen/vim-lsp-settings-adapter')
 minpac#add('hrsh7th/vim-vsnip')
 minpac#add('hrsh7th/vim-vsnip-integ')
 
@@ -25,7 +23,32 @@ if g:vimrc#nerdfonts_enable
   g:lsp_options.diagSignWarningText = "\uf071"
 endif
 
+# clangd
+if executable("clangd")
+  g:vimrc#lsp_servers->add({
+    name: "clangd",
+    filetype: ["c", "cpp"],
+    path: "clangd",
+    args: ['--clang-tidy', '--header-insertion=never']
+  })
+endif
+
+# rust-analyzer
+if executable("rust-analyzer")
+  g:vimrc#lsp_servers->add({
+    name: "rust-analyzer",
+    filetype: ["rust"],
+    path: "rust-analyzer"
+  })
+endif
+
 augroup vimrc
+  autocmd User LspSetup {
+    if !empty(g:vimrc#lsp_servers)
+      g:LspAddServer(deepcopy(g:vimrc#lsp_servers))
+    endif
+  }
+
   autocmd User LspAttached {
     nnoremap <buffer> <silent> gd <Cmd>LspGotoDefinition<CR>
     nnoremap <buffer> <silent> K  <Cmd>LspHover<CR>
@@ -46,12 +69,6 @@ augroup vimrc
   }
   autocmd User LspDetached setlocal tagfunc<
 augroup END
-
-g:lsp_settings = {
-  clangd: {
-    args: ['--clang-tidy', '--header-insertion=never']
-  }
-}
 
 # 補完選択 → スニペットジャンプ → 通常キー入力
 imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'

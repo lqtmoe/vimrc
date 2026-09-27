@@ -1,7 +1,7 @@
 vim9script
 scriptencoding utf-8
 
-if g:vimrc#input_method != "eskk"
+if g:vimrc#input_method != "skk"
   finish
 endif
 

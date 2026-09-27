@@ -4,7 +4,7 @@ scriptencoding utf-8
 # インプットメソッドを選択する
 g:vimrc#input_method = get(
   g:, "vimrc#input_method",
-  getenv("VIMRC_INPUT_METHOD") ?? "eskk"
+  getenv("VIMRC_INPUT_METHOD") ?? "skk"
 )
 
 # Nerd Fontsによる装飾を有効にする

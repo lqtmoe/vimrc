@@ -2,26 +2,29 @@ vim9script
 scriptencoding utf-8
 
 const FONTS = [
-  ('UDEV Gothic NF',          11),
-  ('PlemolJP NF',             10),
-  ('HackGen NF',              11),
-  ('UDEV Gothic',             11),
-  ('PlemolJP',                10),
-  ('HackGen',                 11),
-  ('Ricty Discord',           11),
-  ('Ricty Dminished Discord', 11),
-  ('Ricty',                   11),
-  ('Ricty Dminished',         11),
-  ('VL Gothic',               11),
-  ('ＭＳ ゴシック',           11),
+  ('UDEV Gothic NF',          11, true),
+  ('PlemolJP NF',             10, true),
+  ('HackGen NF',              11, true),
+  ('UDEV Gothic',             11, false),
+  ('PlemolJP',                10, false),
+  ('HackGen',                 11, false),
+  ('Ricty Discord',           11, false),
+  ('Ricty Dminished Discord', 11, false),
+  ('Ricty',                   11, false),
+  ('Ricty Dminished',         11, false),
+  ('VL Gothic',               11, false),
+  ('ＭＳ ゴシック',           11, false),
 ]
 
 if has('gui_gtk') && executable("fc-list")
   var system_font_list = systemlist("env LC_ALL=C fc-list --format='%{family[0]}\\n'")
   set guifont=monospace\ 11
-  for [font_name, font_size] in FONTS
+  for [font_name, font_size, is_nerdfonts] in FONTS
     if index(system_font_list, font_name) > -1
       &guifont = font_name .. ' ' .. font_size
+      if is_nerdfonts && !has_key(environ(), "VIMRC_NERDFONTS_ENABLE")
+        g:vimrc#nerdfonts_enable = true
+      endif
       break
     endif
   endfor

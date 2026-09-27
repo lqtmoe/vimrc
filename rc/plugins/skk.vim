@@ -49,13 +49,13 @@ augroup vimrc
   }
 
   # 自動補完中に変換開始できないことへの対応
-  autocmd vimrc User eskk-enable-post {
+  autocmd User eskk-enable-post {
     if trim(execute("setl ac?")) !~ "^--"
       b:vimrc_eskk_backup_ac = &l:ac
     endif
     &l:ac = false
   }
-  autocmd vimrc User eskk-disable-post {
+  autocmd User eskk-disable-post {
     if exists("b:vimrc_eskk_backup_ac")
       &l:ac = b:vimrc_eskk_backup_ac
       unlet b:vimrc_eskk_backup_ac

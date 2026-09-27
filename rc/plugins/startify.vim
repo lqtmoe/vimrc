@@ -13,7 +13,7 @@ g:startify_lists = [
   { type: 'files',     header: [' Recently Used'] },
 ]
 if executable('fortune')
-  g:startify_custom_header = 'vimrc#util#SystemList(["fortune"])'
+  g:startify_custom_header = 'vimrc#util#SystemList(["fortune", "-s"])'
 else
   g:startify_custom_header = 'startify#fortune#quote()'
 endif

@@ -30,7 +30,7 @@ if has('gui_gtk') && executable("fc-list")
   endfor
 elseif has('gui_win32')
   set guifont=
-  for [font_name, font_size] in FONTS
+  for [font_name, font_size, _] in FONTS
     execute 'set' 'guifont+=' .. substitute(font_name, '\s', '_', 'g') .. ':h' .. font_size
   endfor
   set guifont+=monospace:h11

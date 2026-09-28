@@ -84,8 +84,8 @@ augroup vimrc
       "lsp_error": "error",
       "lsp_warning": "warning" }
     )
-    g:lightline.active.right[0]->insert("lsp_error")
-    g:lightline.active.right[0]->insert("lsp_warning")
+    g:lightline.active.right[0]->add("lsp_warning")
+    g:lightline.active.right[0]->add("lsp_error")
 
     if exists('g:loaded_lightline')
       lightline#init()

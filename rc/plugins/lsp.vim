@@ -12,10 +12,9 @@ g:lsp_options = {
   snippetSupport: true,
   vsnipSupport: true,
   semanticHighlight: true,
-  showDiagWithVirtualText: true,
-  diagVirtualTextAlign: "below",
   showInlayHints: true,
   incrementalSync: true,
+  popupBorder: true,
 }
 
 if g:vimrc#nerdfonts_enable
@@ -92,6 +91,8 @@ augroup vimrc
       lightline#update()
     endif
   }
+
+  autocmd User LspSetup autocmd vimrc CursorHold * silent! LspDiag! current
 
   autocmd User LspDiagsUpdated {
     if exists('g:loaded_lightline')

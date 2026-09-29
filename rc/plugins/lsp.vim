@@ -22,25 +22,6 @@ if g:vimrc#nerdfonts_enable
   g:lsp_options.diagSignWarningText = "\uf071"
 endif
 
-# clangd
-if executable("clangd")
-  g:vimrc#lsp_servers->add({
-    name: "clangd",
-    filetype: ["c", "cpp"],
-    path: "clangd",
-    args: ['--clang-tidy', '--header-insertion=never']
-  })
-endif
-
-# rust-analyzer
-if executable("rust-analyzer")
-  g:vimrc#lsp_servers->add({
-    name: "rust-analyzer",
-    filetype: ["rust"],
-    path: "rust-analyzer"
-  })
-endif
-
 def LspErrorCount(): string
   var count = len(filter(
     lsp#diag#GetDiagsForBuf(),
@@ -124,5 +105,7 @@ augroup END
 # 補完選択 → スニペットジャンプ → 通常キー入力
 imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
 imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+
+LoadConfig plugins/lsp/server.vim
 
 # vim: et sw=2:

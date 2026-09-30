@@ -54,4 +54,21 @@ elseif executable("pyrefly")
   })
 endif
 
+# bash-language-server
+if executable("npx")
+  g:vimrc#lsp_servers->add({
+    name: "bash-language-server",
+    filetype: ["bash", "sh"],
+    path: "npx",
+    args: ["bash-language-server", "start"]
+  })
+elseif executable("bash-language-server")
+  g:vimrc#lsp_servers->add({
+    name: "bash-language-server",
+    filetype: ["bash", "sh"],
+    path: "bash-language-server",
+    args: ["start"]
+  })
+endif
+
 # vim: et sw=2:

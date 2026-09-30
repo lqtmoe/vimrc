@@ -22,31 +22,9 @@ if g:vimrc#nerdfonts_enable
   g:lsp_options.diagSignWarningText = "\uf071"
 endif
 
-def LspErrorCount(): string
-  var count = len(filter(
-    lsp#diag#GetDiagsForBuf(),
-    (_, val) => val.severity == 1
-  ))
-
-  if count > 0
-    return (g:vimrc#nerdfonts_enable ? "\uf05e " : "E:") .. count
-  else
-    return null_string
-  endif
-enddef
-
-def LspWarningCount(): string
-  var count = len(filter(
-    lsp#diag#GetDiagsForBuf(),
-    (_, val) => val.severity == 2
-  ))
-
-  if count > 0
-    return (g:vimrc#nerdfonts_enable ? "\uf071 " : "W:") .. count
-  else
-    return null_string
-  endif
-enddef
+# 補完選択 → スニペットジャンプ → 通常キー入力
+imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
 
 augroup vimrc
   autocmd User LspSetup {
@@ -55,31 +33,8 @@ augroup vimrc
     endif
   }
 
-  autocmd User LspSetup {
-    g:lightline.component_expand->extend({
-      "lsp_error": expand("<SID>") .. "LspErrorCount",
-      "lsp_warning": expand("<SID>") .. "LspWarningCount" }
-    )
-    g:lightline.component_type->extend({
-      "lsp_error": "error",
-      "lsp_warning": "warning" }
-    )
-    g:lightline.active.right[0]->add("lsp_warning")
-    g:lightline.active.right[0]->add("lsp_error")
-
-    if exists('g:loaded_lightline')
-      lightline#init()
-      lightline#update()
-    endif
-  }
-
+  # CursorHold で診断情報ポップアップ
   autocmd User LspSetup autocmd vimrc CursorHold * silent! LspDiag! current
-
-  autocmd User LspDiagsUpdated {
-    if exists('g:loaded_lightline')
-      lightline#update()
-    endif
-  }
 
   autocmd User LspAttached {
     nnoremap <buffer> <silent> gd <Cmd>LspGotoDefinition<CR>
@@ -102,10 +57,7 @@ augroup vimrc
   autocmd User LspDetached setlocal tagfunc<
 augroup END
 
-# 補完選択 → スニペットジャンプ → 通常キー入力
-imap <expr> <Tab>   pumvisible() ? '<C-n>' : vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-imap <expr> <S-Tab> pumvisible() ? '<C-p>' : vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
-
 LoadConfig plugins/lsp/server.vim
+LoadConfig plugins/lsp/statusline.vim
 
 # vim: et sw=2:
